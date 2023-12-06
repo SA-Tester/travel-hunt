@@ -17,6 +17,7 @@ function HelloWorld() {
 
   return (
     <div>
+      <h1></h1>
       <p>{message}</p>
     </div>
   );
