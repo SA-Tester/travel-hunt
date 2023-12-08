@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import NavBar from "./Components/NavBar/Navbar";
 
-function HelloWorld() {
-  const [message, setMessage] = useState("");
-
+const Helloworld = () => {
+  const [msg, setMessage] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/get")
+      .get("http://localhost:8000/api/sasith")
       .then((response) => {
         setMessage(response.data.message);
       })
@@ -14,13 +14,7 @@ function HelloWorld() {
         console.log(error);
       });
   }, []);
+  return <>{msg}</>;
+};
 
-  return (
-    <div>
-      <h1></h1>
-      <p>{message}</p>
-    </div>
-  );
-}
-
-export default HelloWorld;
+export default Helloworld;
