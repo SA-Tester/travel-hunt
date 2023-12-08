@@ -6,7 +6,7 @@ const Helloworld = () => {
   const [msg, setMessage] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/sasith")
+      .get("http://localhost:8000/api/get")
       .then((response) => {
         setMessage(response.data.message);
       })
