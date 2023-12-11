@@ -8,6 +8,7 @@ const Helloworld = () => {
     axios
       .get("http://localhost:8000/api/get")
       .then((response) => {
+        console.log(response)
         setMessage(response.data.message);
       })
       .catch((error) => {
