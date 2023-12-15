@@ -46,7 +46,10 @@ const Home = () => {
     //   <h3>Restaurant Name: {result.name}</h3>
     //   {/* Render additional restaurant details here */}
     // </div>
-    <Helloworld />
+    <>
+      <NavBar />
+      <Helloworld />
+    </>
   );
 };
 
