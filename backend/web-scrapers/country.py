@@ -5,7 +5,7 @@ import mysql.connector
 import time
 
 # SOURCES: Google Search Results, Flagpedia.net
-# id, name, description, flag
+# id, name, code, description, flag
 
 
 def fill_country():
@@ -312,8 +312,9 @@ def fill_country():
 
         # INSERT DATA TO THE DATABASE
         try:
-            query = "INSERT INTO country(id, name, description, flag) VALUES(%s, %s, %s, %s)"
-            values = (id, name, filtered_description, image)
+            query = "INSERT INTO country(id, name, code, description, flag) VALUES(%s, %s, %s, %s, %s)"
+            values = (id, name, countries[i]["code"],
+                      filtered_description, image)
             dbcursor.execute(query, values)
             db.commit()
             print(name + " is inserted. " + str(i+1) +
