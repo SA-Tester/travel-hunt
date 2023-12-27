@@ -4573,7 +4573,7 @@ Jutaí,Jutai,-2.7469,-66.7669,Brazil,BR,BRA,Amazonas,,13886,1076835139
 Arroio dos Ratos,Arroio dos Ratos,-30.0769,-51.7289,Brazil,BR,BRA,Rio Grande do Sul,,13606,1076770923
 Santo Augusto,Santo Augusto,-27.8508,-53.7769,Brazil,BR,BRA,Rio Grande do Sul,,13848,1076594342
 Casinhas,Casinhas,-7.7411,-35.7211,Brazil,BR,BRA,Pernambuco,,13766,1076512375
-Cabo Verde,Cabo Verde,-21.4719,-46.3958,Brazil,BR,BRA,Minas Gerais,,13823,1076433719
+Cape Verde,Cape Verde,-21.4719,-46.3958,Brazil,BR,BRA,Minas Gerais,,13823,1076433719
 Uruana,Uruana,-15.4978,-49.6878,Brazil,BR,BRA,Goiás,,13818,1076128306
 Peri-Mirim,Peri-Mirim,-2.5778,-44.8539,Brazil,BR,BRA,Maranhão,,13803,1076167021
 Joaquim Pires,Joaquim Pires,-3.5078,-42.1978,Brazil,BR,BRA,Piauí,,13817,1076601550
@@ -5333,7 +5333,7 @@ Nova Glória,Nova Gloria,-15.1428,-49.5708,Brazil,BR,BRA,Goiás,,8508,1076435381
 Alvorada,Alvorada,-12.4800,-49.1250,Brazil,BR,BRA,Tocantins,,8374,1076121080
 Príncipe da Beira,Principe da Beira,-12.4167,-64.4166,Brazil,BR,BRA,Rondônia,,956,1076482734
 Abunã,Abuna,-9.6954,-65.3597,Brazil,BR,BRA,Rondônia,,1929,1076632448
-Road Town,Road Town,18.4167,-64.6167,British Virgin Islands,VG,VGB,,primary,12603,1092732412
+Road Town,Road Town,18.4167,-64.6167,Virgin Islands, British,VG,VGB,,primary,12603,1092732412
 Bandar Seri Begawan,Bandar Seri Begawan,4.8903,114.9422,Brunei,BN,BRN,Brunei dan Muara,primary,50000,1096465895
 Kuala Belait,Kuala Belait,4.5828,114.1918,Brunei,BN,BRN,Belait,admin,4259,1096999548
 Bangar,Bangar,4.7086,115.0739,Brunei,BN,BRN,Temburong,admin,626,1096321221
@@ -5519,29 +5519,29 @@ Cankuzo,Cankuzo,-3.2194,30.5528,Burundi,BI,BDI,Cankuzo,admin,3624,1108631099
 Isale,Isale,-3.3444,29.4833,Burundi,BI,BDI,Bujumbura Rural,admin,,1108407022
 Gitega,Gitega,-3.4260,29.8436,Burundi,BI,BDI,Mwaro,,23167,1108962433
 Gatumba,Gatumba,-3.3333,29.2500,Burundi,BI,BDI,Bujumbura Rural,,11700,1108258446
-Praia,Praia,14.9180,-23.5090,Cabo Verde,CV,CPV,Praia,primary,127832,1132398770
-Mindelo,Mindelo,16.8860,-24.9880,Cabo Verde,CV,CPV,São Vicente,admin,70468,1132180389
-São Filipe,Sao Filipe,14.8950,-24.4980,Cabo Verde,CV,CPV,São Filipe,admin,22227,1132693257
-Ribeira Grande,Ribeira Grande,17.1830,-25.0650,Cabo Verde,CV,CPV,Ribeira Grande,admin,18890,1132061543
-Tarrafal,Tarrafal,15.2780,-23.7520,Cabo Verde,CV,CPV,Tarrafal,admin,18561,1132834308
-Porto Novo,Porto Novo,17.0190,-25.0640,Cabo Verde,CV,CPV,Porto Novo,admin,18028,1132233840
-Assomada,Assomada,15.0960,-23.6670,Cabo Verde,CV,CPV,Santa Catarina,admin,12026,1132845019
-Pedra Badejo,Pedra Badejo,15.1370,-23.5340,Cabo Verde,CV,CPV,Santa Cruz,admin,9530,1132841923
-Sal Rei,Sal Rei,16.1770,-22.9180,Cabo Verde,CV,CPV,Boa Vista,admin,6357,1132420232
-Espargos,Espargos,16.7560,-22.9460,Cabo Verde,CV,CPV,Sal,admin,6173,1132760152
-Tarrafal,Tarrafal,16.5660,-24.3570,Cabo Verde,CV,CPV,Tarrafal de São Nicolau,admin,5237,1132502171
-Ponta do Sol,Ponta do Sol,17.2020,-25.0930,Cabo Verde,CV,CPV,Ribeira Grande,admin,4738,1132137257
-João Teves,Joao Teves,15.0680,-23.5890,Cabo Verde,CV,CPV,São Lourenço dos Órgãos,admin,,1132758433
-Calheta de São Miguel,Calheta de Sao Miguel,15.1860,-23.5930,Cabo Verde,CV,CPV,São Miguel,admin,4123,1132750609
-Porto Inglês,Porto Ingles,15.1380,-23.2110,Cabo Verde,CV,CPV,Maio,admin,3056,1132346974
-São Domingos,Sao Domingos,15.0280,-23.5630,Cabo Verde,CV,CPV,São Domingos,admin,2818,1132246964
-Cidade Velha,Cidade Velha,14.9160,-23.6060,Cabo Verde,CV,CPV,Ribeira Grande de Santiago,admin,2148,1132073400
-Picos,Picos,15.0830,-23.6320,Cabo Verde,CV,CPV,São Salvador do Mundo,admin,,1132670996
-Pombas,Pombas,17.1490,-25.0150,Cabo Verde,CV,CPV,Paul,admin,,1132720315
-Nova Sintra,Nova Sintra,14.8710,-24.6960,Cabo Verde,CV,CPV,Brava,admin,,1132634480
-Igreja,Igreja,15.0339,-24.3250,Cabo Verde,CV,CPV,Mosteiros,admin,,1132174768
-Ribeira Brava,Ribeira Brava,16.6150,-24.2990,Cabo Verde,CV,CPV,Ribeira Brava,admin,,1132498214
-Cova Figueira,Cova Figueira,14.8900,-24.2940,Cabo Verde,CV,CPV,Santa Catarina do Fogo,admin,,1132510430
+Praia,Praia,14.9180,-23.5090,Cape Verde,CV,CPV,Praia,primary,127832,1132398770
+Mindelo,Mindelo,16.8860,-24.9880,Cape Verde,CV,CPV,São Vicente,admin,70468,1132180389
+São Filipe,Sao Filipe,14.8950,-24.4980,Cape Verde,CV,CPV,São Filipe,admin,22227,1132693257
+Ribeira Grande,Ribeira Grande,17.1830,-25.0650,Cape Verde,CV,CPV,Ribeira Grande,admin,18890,1132061543
+Tarrafal,Tarrafal,15.2780,-23.7520,Cape Verde,CV,CPV,Tarrafal,admin,18561,1132834308
+Porto Novo,Porto Novo,17.0190,-25.0640,Cape Verde,CV,CPV,Porto Novo,admin,18028,1132233840
+Assomada,Assomada,15.0960,-23.6670,Cape Verde,CV,CPV,Santa Catarina,admin,12026,1132845019
+Pedra Badejo,Pedra Badejo,15.1370,-23.5340,Cape Verde,CV,CPV,Santa Cruz,admin,9530,1132841923
+Sal Rei,Sal Rei,16.1770,-22.9180,Cape Verde,CV,CPV,Boa Vista,admin,6357,1132420232
+Espargos,Espargos,16.7560,-22.9460,Cape Verde,CV,CPV,Sal,admin,6173,1132760152
+Tarrafal,Tarrafal,16.5660,-24.3570,Cape Verde,CV,CPV,Tarrafal de São Nicolau,admin,5237,1132502171
+Ponta do Sol,Ponta do Sol,17.2020,-25.0930,Cape Verde,CV,CPV,Ribeira Grande,admin,4738,1132137257
+João Teves,Joao Teves,15.0680,-23.5890,Cape Verde,CV,CPV,São Lourenço dos Órgãos,admin,,1132758433
+Calheta de São Miguel,Calheta de Sao Miguel,15.1860,-23.5930,Cape Verde,CV,CPV,São Miguel,admin,4123,1132750609
+Porto Inglês,Porto Ingles,15.1380,-23.2110,Cape Verde,CV,CPV,Maio,admin,3056,1132346974
+São Domingos,Sao Domingos,15.0280,-23.5630,Cape Verde,CV,CPV,São Domingos,admin,2818,1132246964
+Cidade Velha,Cidade Velha,14.9160,-23.6060,Cape Verde,CV,CPV,Ribeira Grande de Santiago,admin,2148,1132073400
+Picos,Picos,15.0830,-23.6320,Cape Verde,CV,CPV,São Salvador do Mundo,admin,,1132670996
+Pombas,Pombas,17.1490,-25.0150,Cape Verde,CV,CPV,Paul,admin,,1132720315
+Nova Sintra,Nova Sintra,14.8710,-24.6960,Cape Verde,CV,CPV,Brava,admin,,1132634480
+Igreja,Igreja,15.0339,-24.3250,Cape Verde,CV,CPV,Mosteiros,admin,,1132174768
+Ribeira Brava,Ribeira Brava,16.6150,-24.2990,Cape Verde,CV,CPV,Ribeira Brava,admin,,1132498214
+Cova Figueira,Cova Figueira,14.8900,-24.2940,Cape Verde,CV,CPV,Santa Catarina do Fogo,admin,,1132510430
 Phnom Penh,Phnom Penh,11.5694,104.9211,Cambodia,KH,KHM,Phnom Penh,primary,2129371,1116260534
 Siem Reap,Siem Reap,13.3622,103.8597,Cambodia,KH,KHM,Siem Reap,admin,147866,1116263015
 Battambang,Battambang,13.1000,103.2000,Cambodia,KH,KHM,Battambang,admin,130000,1116106237
