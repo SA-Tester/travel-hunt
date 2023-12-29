@@ -320,18 +320,18 @@ if __name__ == "__main__":
     # RUN AGAIN AS IT IS FROM 30000. 8:09 AM 29th Dec
     # IMPORTANT: change the file back to worldcities.csv
     # noDescription.csv is the latest. 2:39 a.m.
-    t1 = threading.Thread(target=fillCity, args=(30000, 31001))
-    t2 = threading.Thread(target=fillCity, args=(31000, 32001))
-    t3 = threading.Thread(target=fillCity, args=(32000, 33001))
-    t4 = threading.Thread(target=fillCity, args=(33000, 34001))
-    t5 = threading.Thread(target=fillCity, args=(34000, 35001))
+    # t1 = threading.Thread(target=fillCity, args=(30000, 31001))
+    # t2 = threading.Thread(target=fillCity, args=(31000, 32001))
+    # t3 = threading.Thread(target=fillCity, args=(32000, 33001))
+    # t4 = threading.Thread(target=fillCity, args=(33000, 34001))
+    # t5 = threading.Thread(target=fillCity, args=(34000, 35001))
 
     # missed cities
-    # t1 = threading.Thread(target=fillCity, args=(0, 301)) 
-    # t2 = threading.Thread(target=fillCity, args=(300, 601)) 
-    # t3 = threading.Thread(target=fillCity, args=(600, 901)) 
-    # t4 = threading.Thread(target=fillCity, args=(900, 1201))
-    # t5 = threading.Thread(target=fillCity, args=(1200, 1644)) 
+    t1 = threading.Thread(target=fillCity, args=(0, 301)) 
+    t2 = threading.Thread(target=fillCity, args=(300, 601))
+    t3 = threading.Thread(target=fillCity, args=(600, 901))
+    t4 = threading.Thread(target=fillCity, args=(900, 1201))
+    t5 = threading.Thread(target=fillCity, args=(1200, 1644))
 
     start = time.time()
 
