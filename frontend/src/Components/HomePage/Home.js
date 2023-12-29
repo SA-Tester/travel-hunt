@@ -2,6 +2,9 @@ import NavBar from "../NavBar/Navbar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Helloworld from "../../HelloWorld";
+import PopularPlaces from "../Places/PopularPlaces";
+import HeroSection from "../Hero/HeroSection";
+import FooterCon from "../Footer/FooterCon";
 
 const Home = () => {
   const [result, setResult] = useState(null);
@@ -48,7 +51,10 @@ const Home = () => {
     // </div>
     <>
       <NavBar />
-      <Helloworld />
+      <HeroSection />
+
+      <FooterCon />
+      {/* <Helloworld /> */}
     </>
   );
 };

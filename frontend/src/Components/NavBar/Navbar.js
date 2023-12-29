@@ -1,12 +1,31 @@
-import { DarkThemeToggle, Flowbite, Navbar } from "flowbite-react";
-import React from "react";
+import {
+  Avatar,
+  Button,
+  DarkThemeToggle,
+  Dropdown,
+  Flowbite,
+  Navbar,
+} from "flowbite-react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Image from "../../logo.png";
+import "../NavBar/nav.css";
 
 function NavBar() {
+  const [authstate, setAuthState] = useState(false);
+  const CustomFlowbiteTheme = {
+    nav: {
+      color: {
+        primary: "bg-green-500 hover:bg-green-200",
+      },
+    },
+  };
   return (
-    <Flowbite>
-      <Navbar fluid className="bg-red dark:bg-slate-800">
+    <Flowbite theme={{ theme: CustomFlowbiteTheme }}>
+      <Navbar
+        fluid
+        className="bg-transparent dark:bg-slate-800 navcolor shadow-xl text-white"
+      >
         <Navbar.Brand as={Link} href="https://flowbite-react.com">
           <img
             src={Image}
@@ -17,15 +36,56 @@ function NavBar() {
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Navbar.Link href="#" active>
+          <Navbar.Link href="#" active className="text-white">
             Home
           </Navbar.Link>
-          <Navbar.Link as={Link} href="#">
+          <Navbar.Link as={Link} href="#" className="text-white">
             About
           </Navbar.Link>
-          <Navbar.Link href="#">Services</Navbar.Link>
-          <Navbar.Link href="#">Pricing</Navbar.Link>
-          <Navbar.Link href="#">Contact</Navbar.Link>
+          <Navbar.Link href="#" className="text-white">
+            Services
+          </Navbar.Link>
+          <Navbar.Link href="#" className="text-white">
+            Pricing
+          </Navbar.Link>
+          <Navbar.Link href="#" className="text-white">
+            Contact
+          </Navbar.Link>
+          {authstate ? (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar
+                  alt="User settings"
+                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  rounded
+                />
+              }
+            >
+              <Dropdown.Header>
+                <span className="block text-sm">Bonnie Green</span>
+                <span className="block truncate text-sm font-medium">
+                  name@flowbite.com
+                </span>
+              </Dropdown.Header>
+              <Dropdown.Item>Dashboard</Dropdown.Item>
+              <Dropdown.Item>Settings</Dropdown.Item>
+              <Dropdown.Item>Earnings</Dropdown.Item>
+
+              <Dropdown.Divider />
+              <Dropdown.Item>Sign out</Dropdown.Item>
+            </Dropdown>
+          ) : (
+            <div className="flex flex-wrap gap-2 border-s-2 px-3">
+              <Button className="border-0 text-gray-700 bg-transprent font-bold" pill>
+                Sign In
+              </Button>
+              <Button className="bg-sky-950 text-white border-0" pill>
+                Register
+              </Button>
+            </div>
+          )}
           <DarkThemeToggle />
         </Navbar.Collapse>
       </Navbar>
