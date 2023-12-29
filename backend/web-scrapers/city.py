@@ -124,6 +124,8 @@ def getImages(cityName, coutryName):
 
 
 def fillCity(start, end):
+    global rowCount
+
     dbconfig = getConnection()
     db = dbconfig[0]
     dbcursor = dbconfig[1]
@@ -169,12 +171,15 @@ def fillCity(start, end):
                     # INSERT DATA TO THE DATABASE AS A BATCH
                     dbcursor.executemany(query, data)
                     db.commit()
-                    print("\n", dbcursor.rowcount,
+                    nrows = dbcursor.rowcount
+                    print("\n", nrows,
                           "Records Inserted Successfully\n")
+                    rowCount += nrows
                     data.clear()
 
-                except:
+                except Exception as exception:
                     print("Error occured when inserting", i)
+                    print(exception)
                     db.rollback()
 
         i += 1
@@ -185,12 +190,15 @@ def fillCity(start, end):
             # INSERT DATA TO THE DATABASE AS A BATCH
             dbcursor.executemany(query, data)
             db.commit()
-            print("\n", dbcursor.rowcount,
+            nrows = dbcursor.rowcount
+            print("\n", nrows,
                   "Records Inserted Successfully\n")
+            rowCount += nrows
             data.clear()
 
-        except:
+        except Exception as exception:
             print("Error occured when inserting", i)
+            print(exception)
             db.rollback()
 
     file.close()
@@ -200,6 +208,7 @@ def fillCity(start, end):
 
 def update(start, end):
     # SELECT city.id, city.name, country.name FROM city INNER JOIN country ON city.country_id = country.id WHERE city.description = "Not Found";
+    global rowCount
 
     config = getConnection()
     conn = config[0]
@@ -218,24 +227,26 @@ def update(start, end):
         if i > start and i < end:
             id = row[0]
             description = getDescription(row[1], row[2])
-            print(description)
+            # print(description)
 
             if description != "Not Found":
                 data.append((description, id))
-                print(i, row[1], " configured.\n")
+                print(i, row[1], " Configured.\n")
 
             else:
-                print(i, row[1], "\n")
+                print(i, row[1], "Not Found", "\n")
 
             if(len(data) > 4):
                 try:
                     dbcursor.executemany(query, data)
                     conn.commit()
-                    print(dbcursor.rowcount, "rows updated.")
+                    nrows = dbcursor.rowcount
+                    print(nrows, "rows updated.")
+                    rowCount += nrows
                     data.clear()
 
-                except:
-                    print("Error Occured")
+                except Exception as exception:
+                    print(exception)
 
         i += 1
 
@@ -243,7 +254,9 @@ def update(start, end):
         try:
             dbcursor.executemany(query, data)
             conn.commit()
-            print(dbcursor.rowcount, "rows updated.")
+            nrows = dbcursor.rowcount
+            print(nrows, "rows updated.")
+            rowCount += nrows
             data.clear()
 
         except Exception as exception:
@@ -285,6 +298,7 @@ def checkForMissedRecords():
     missed = []
     query = "SELECT name FROM city WHERE name=%s"
 
+    endpoint = 44692 # UPDATE ACCORDINGLY
     i = 2
     for row in csvreader:
         cityName = row[1]
@@ -298,11 +312,11 @@ def checkForMissedRecords():
 
         else:
             print("Current row: ", i)
-            
+                
         i += 1
 
-        if (i > 30000):
-            break
+        if (i > endpoint):
+           break
 
     cityFile.close()
     missedCityFile.close()
@@ -312,26 +326,49 @@ def checkForMissedRecords():
 
 
 if __name__ == "__main__":
+
+    rowCount = 0
+
     ####################### TO INSERT THE DATA #####################################################
 
-    # # lock = threading.Lock()
-    count = getNextID()
+    # count = getNextID()
 
-    # RUN AGAIN AS IT IS FROM 30000. 8:09 AM 29th Dec
-    # IMPORTANT: change the file back to worldcities.csv
-    # noDescription.csv is the latest. 2:39 a.m.
-    # t1 = threading.Thread(target=fillCity, args=(30000, 31001))
-    # t2 = threading.Thread(target=fillCity, args=(31000, 32001))
-    # t3 = threading.Thread(target=fillCity, args=(32000, 33001))
-    # t4 = threading.Thread(target=fillCity, args=(33000, 34001))
-    # t5 = threading.Thread(target=fillCity, args=(34000, 35001))
+    # t1 = threading.Thread(target=fillCity, args=(0, 21))
+    # t2 = threading.Thread(target=fillCity, args=(20, 41))
+    # t3 = threading.Thread(target=fillCity, args=(40, 61))
+    # t4 = threading.Thread(target=fillCity, args=(60, 81))
+    # # t5 = threading.Thread(target=fillCity, args=(44000, 44693))
 
-    # missed cities
-    t1 = threading.Thread(target=fillCity, args=(0, 301)) 
-    t2 = threading.Thread(target=fillCity, args=(300, 601))
-    t3 = threading.Thread(target=fillCity, args=(600, 901))
-    t4 = threading.Thread(target=fillCity, args=(900, 1201))
-    t5 = threading.Thread(target=fillCity, args=(1200, 1644))
+    # start = time.time()
+
+    # t1.start()
+    # t2.start()
+    # t3.start()
+    # t4.start()
+    # # t5.start()
+
+    # t1.join()
+    # t2.join()
+    # t3.join()
+    # t4.join()
+    # # t5.join()
+
+    # end = time.time()
+
+    # print("Done!")
+    # print(rowCount, "Rows Added")
+    # print("Execution Time: ", (end - start)/60)
+
+    ################################################################################################
+
+    ####################### TO UPDATE THE DESCRIPTION ##############################################
+
+    ## START FROM THIS 4:02 AM 30 DEC
+    t1 = threading.Thread(target=update, args=(0, 101)) # 500, 601 #
+    t2 = threading.Thread(target=update, args=(100, 201)) # 600, 701 # 
+    t3 = threading.Thread(target=update, args=(200, 301)) # 700, 801 # 
+    t4 = threading.Thread(target=update, args=(300, 401)) # 800, 901 # 
+    t5 = threading.Thread(target=update, args=(400, 501)) # 900, 1001 # 
 
     start = time.time()
 
@@ -350,35 +387,8 @@ if __name__ == "__main__":
     end = time.time()
 
     print("Done!")
+    print(rowCount, "rows updated.")
     print("Execution Time: ", (end - start)/60)
-
-    ################################################################################################
-
-    ####################### TO UPDATE THE DESCRIPTION ##############################################
-
-    # t1 = threading.Thread(target=update, args=(4000, 4061))
-    # t2 = threading.Thread(target=update, args=(4060, 4121))
-    # t3 = threading.Thread(target=update, args=(4120, 4181))
-    # t4 = threading.Thread(target=update, args=(4180, 4241))
-    # t5 = threading.Thread(target=update, args=(4240, 4301))
-
-    # start = time.time()
-    # t1.start()
-    # t2.start()
-    # t3.start()
-    # t4.start()
-    # t5.start()
-
-    # t1.join()
-    # t2.join()
-    # t3.join()
-    # t4.join()
-    # t5.join()
-
-    # end = time.time()
-
-    # print("Done!")
-    # print("Execution Time: ", (end - start)/60)
 
     ################################################################################################
 
@@ -391,7 +401,7 @@ if __name__ == "__main__":
     ####################### CHECK FOR MISSED RECORDS ###############################################
 
     # start = time.time()
-    # checkForMissedRecords()
+    # checkForMissedRecords() # UPDATE THE STOP COUNTER
     # end = time.time()
 
     # print("Done!")
