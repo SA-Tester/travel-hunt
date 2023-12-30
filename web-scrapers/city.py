@@ -331,44 +331,13 @@ if __name__ == "__main__":
 
     ####################### TO INSERT THE DATA #####################################################
 
-    # count = getNextID()
+    count = getNextID()
 
-    # t1 = threading.Thread(target=fillCity, args=(0, 21))
-    # t2 = threading.Thread(target=fillCity, args=(20, 41))
-    # t3 = threading.Thread(target=fillCity, args=(40, 61))
-    # t4 = threading.Thread(target=fillCity, args=(60, 81))
-    # # t5 = threading.Thread(target=fillCity, args=(44000, 44693))
-
-    # start = time.time()
-
-    # t1.start()
-    # t2.start()
-    # t3.start()
-    # t4.start()
-    # # t5.start()
-
-    # t1.join()
-    # t2.join()
-    # t3.join()
-    # t4.join()
-    # # t5.join()
-
-    # end = time.time()
-
-    # print("Done!")
-    # print(rowCount, "Rows Added")
-    # print("Execution Time: ", (end - start)/60)
-
-    ################################################################################################
-
-    ####################### TO UPDATE THE DESCRIPTION ##############################################
-
-    ## START FROM THIS 4:02 AM 30 DEC
-    t1 = threading.Thread(target=update, args=(0, 101)) # 500, 601 #
-    t2 = threading.Thread(target=update, args=(100, 201)) # 600, 701 # 
-    t3 = threading.Thread(target=update, args=(200, 301)) # 700, 801 # 
-    t4 = threading.Thread(target=update, args=(300, 401)) # 800, 901 # 
-    t5 = threading.Thread(target=update, args=(400, 501)) # 900, 1001 # 
+    t1 = threading.Thread(target=fillCity, args=(0, 21))
+    t2 = threading.Thread(target=fillCity, args=(20, 41))
+    t3 = threading.Thread(target=fillCity, args=(40, 61))
+    t4 = threading.Thread(target=fillCity, args=(60, 81))
+    t5 = threading.Thread(target=fillCity, args=(80, 101))
 
     start = time.time()
 
@@ -387,8 +356,38 @@ if __name__ == "__main__":
     end = time.time()
 
     print("Done!")
-    print(rowCount, "rows updated.")
+    print(rowCount, "Rows Added")
     print("Execution Time: ", (end - start)/60)
+
+    ################################################################################################
+
+    ####################### TO UPDATE THE DESCRIPTION ##############################################
+
+    # t1 = threading.Thread(target=update, args=(4500, 4531)) # 4500, 4531 # 
+    # t2 = threading.Thread(target=update, args=(4530, 4591)) # 4530, 4591 # 
+    # t3 = threading.Thread(target=update, args=(4590, 4601)) # 4590, 4601 # 
+    # t4 = threading.Thread(target=update, args=(4600, 4621)) # 4600, 4621 # 
+    # t5 = threading.Thread(target=update, args=(4620, 4632)) # 4620, 4632 # 
+
+    # start = time.time()
+
+    # t1.start()
+    # t2.start()
+    # t3.start()
+    # t4.start()
+    # t5.start()
+
+    # t1.join()
+    # t2.join()
+    # t3.join()
+    # t4.join()
+    # t5.join()
+
+    # end = time.time()
+
+    # print("Done!")
+    # print(rowCount, "rows updated.")
+    # print("Execution Time: ", (end - start)/60)
 
     ################################################################################################
 
