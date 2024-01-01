@@ -4,19 +4,22 @@ import requests
 from bs4 import BeautifulSoup
 import threading
 import time
-import re
+from dotenv import load_dotenv
+import os
 
 # SOURCES: Google Images and Google Search Results
 # id name latitude longitude description country_id
 
 
 def getConnection():
+    load_dotenv()
+
     # DATABASE CONFIGURATIONS
     db = mysql.connector.connect(
-        host="localhost",
-        database="travel_hunt",
-        user="testuser",
-        password="testuser"
+        host = os.getenv("DB_HOST"),
+        database = os.getenv("DB_NAME"),
+        user = os.getenv("DB_USER"),
+        password= os.getenv("DB_PASSWORD")
     )
 
     # CURSOR TO OPERATE THE DATABASE
