@@ -3,26 +3,24 @@ import requests
 from bs4 import BeautifulSoup
 import mysql.connector
 import time
+import os
+from dotenv import load_dotenv
 
 # SOURCES: Google Search Results, Flagpedia.net
 # id, name, code, description, flag
 
 
 def fill_country():
+    load_dotenv()
+
     # DATABASE CONFIGURATIONS
     db = mysql.connector.connect(
-        host="localhost",
-        database="travel_hunt",
-        user="testuser",
-        password="testuser"
+        host=os.getenv("DB_HOST"),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD")
     )
-    # db = mysql.connector.connect(
-    #     host="localhost",
-    #     database="travel_hunt",
-    #     user="root",
-    #     password="testuser"
-    # )
-
+    
     # CURSOR TO OPERATE THE DATABASE
     dbcursor = db.cursor()
 
