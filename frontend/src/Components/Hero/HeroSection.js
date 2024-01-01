@@ -2,8 +2,8 @@ import { Button, Card, Carousel, Label, TextInput } from "flowbite-react";
 import "../Hero/hero.css";
 const HeroSection = () => {
   return (
-    <div className="bg-red-100 hero">
-      <div className="h-full">
+    <div className="bg-red-100 relative h-screen md:h-[80vh] lg:h-[80vh]">
+      <div className="h-screen md:h-full lg:h-full">
         <Carousel
           indicators={false}
           slideInterval={5000}
@@ -12,27 +12,27 @@ const HeroSection = () => {
           <img
             src="https://images.unsplash.com/photo-1536625979259-edbae645c7c3?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="..."
-            className="object-cover "
+            className="object-cover h-screen "
           />
           <img
             src="https://images.unsplash.com/photo-1564934319095-299ca11c6e4f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="..."
-            className="object-cover"
+            className="object-cover h-screen"
           />
           <img
             src="https://images.unsplash.com/photo-1630088737201-00e30f542229?q=80&w=1827&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="..."
-            className="object-cover"
+            className="object-cover h-screen"
           />
           <img
             src="https://images.unsplash.com/photo-1703028408829-ba45aa14b782?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="..."
-            className="object-cover"
+            className="object-cover h-screen"
           />
           <img
             src="https://images.unsplash.com/photo-1611520189922-f7b1ba7d801e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="..."
-            className="object-cover"
+            className="object-cover h-screen"
           />
         </Carousel>
       </div>

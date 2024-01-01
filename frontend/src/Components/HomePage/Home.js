@@ -52,7 +52,7 @@ const Home = () => {
     <>
       <NavBar />
       <HeroSection />
-
+      <PopularPlaces />
       <FooterCon />
       {/* <Helloworld /> */}
     </>

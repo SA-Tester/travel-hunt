@@ -9,13 +9,19 @@ import time
 
 
 def fill_country():
-    # DATABASE CONFIGURATIONS
+    DATABASE CONFIGURATIONS
     db = mysql.connector.connect(
         host="localhost",
         database="travel_hunt",
         user="testuser",
         password="testuser"
     )
+    # db = mysql.connector.connect(
+    #     host="localhost",
+    #     database="travel_hunt",
+    #     user="root",
+    #     password="testuser"
+    # )
 
     # CURSOR TO OPERATE THE DATABASE
     dbcursor = db.cursor()
