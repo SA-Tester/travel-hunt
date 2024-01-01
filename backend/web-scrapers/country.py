@@ -9,7 +9,7 @@ import time
 
 
 def fill_country():
-    DATABASE CONFIGURATIONS
+    # DATABASE CONFIGURATIONS
     db = mysql.connector.connect(
         host="localhost",
         database="travel_hunt",
