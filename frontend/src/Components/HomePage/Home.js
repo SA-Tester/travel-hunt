@@ -2,39 +2,28 @@ import NavBar from "../NavBar/Navbar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Helloworld from "../../HelloWorld";
-import PopularPlaces from "../Places/PopularPlaces";
 import HeroSection from "../Hero/HeroSection";
 import FooterCon from "../Footer/FooterCon";
+import Places from "../Places/Places";
 
 const Home = () => {
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState([]);
   const baseURL =
-    "https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyA3pAqddClbAT-GzSbGaFF6vJgeq3iu6-k";
+    "https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants%20in%20Sydney&key=AIzaSyA3pAqddClbAT-GzSbGaFF6vJgeq3iu6-k";
 
   const getResult = async () => {
     try {
-      const response = await axios.post(baseURL, {
-        includedTypes: ["restaurant"],
-        maxResultCount: 10,
-        locationRestriction: {
-          circle: {
-            center: {
-              latitude: 37.7937,
-              longitude: -122.3965,
-            },
-            radius: 500.0,
-          },
-        },
+      const response = await axios.post(baseURL).then((data) => {
+        setResult(data);
       });
-      setResult(response.data);
     } catch (error) {
       console.log("Error fetching restaurant details:", error);
     }
   };
 
-  // useEffect(() => {
-  //   getResult();
-  // }, []);
+  useEffect(() => {
+    getResult();
+  }, []);
 
   // if (!result) {
   //   return (
@@ -52,7 +41,8 @@ const Home = () => {
     <>
       <NavBar />
       <HeroSection />
-
+      <Places props={{ name: "Popular Places" }} />
+      <Places props={{ name: "Hotels Nearby" }} />
       <FooterCon />
       {/* <Helloworld /> */}
     </>

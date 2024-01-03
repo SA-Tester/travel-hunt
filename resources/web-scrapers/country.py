@@ -20,7 +20,7 @@ def fill_country():
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD")
     )
-
+    
     # CURSOR TO OPERATE THE DATABASE
     dbcursor = db.cursor()
 
