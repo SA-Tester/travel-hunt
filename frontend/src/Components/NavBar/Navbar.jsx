@@ -7,11 +7,21 @@ import {
   Navbar,
 } from "flowbite-react";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Image from "../../logo.png";
 import "../NavBar/nav.css";
 
 function NavBar() {
+  const navigate = useNavigate();
+
+  const navigateToLogin = () => {
+    navigate("/login");
+  }
+
+  const navigateTosignup = () => {
+    navigate("/signup");
+  }
+
   const [authstate, setAuthState] = useState(false);
   const CustomFlowbiteTheme = {
     nav: {
@@ -78,10 +88,10 @@ function NavBar() {
             </Dropdown>
           ) : (
             <div className="flex flex-wrap gap-2 border-s-2 px-3">
-              <Button className="border-0 text-gray-700 bg-transprent font-bold" pill>
+              <Button className="border-0 text-gray-700 bg-transprent font-bold" onClick={navigateToLogin} pill>
                 Login
               </Button>
-              <Button className="bg-sky-950 text-white border-0" pill>
+              <Button className="bg-sky-950 text-white border-0" onClick={navigateTosignup} pill>
                 Register
               </Button>
             </div>
