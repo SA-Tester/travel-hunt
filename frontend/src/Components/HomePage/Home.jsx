@@ -43,7 +43,6 @@ const Home = () => {
       <Places props={{ name: "Popular Places" }} />
       <Places props={{ name: "Hotels Nearby" }} />
       <FooterCon />
-      {/* <Helloworld /> */}
     </>
   );
 };

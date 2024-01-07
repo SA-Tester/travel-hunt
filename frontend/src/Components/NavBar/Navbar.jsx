@@ -79,7 +79,7 @@ function NavBar() {
           ) : (
             <div className="flex flex-wrap gap-2 border-s-2 px-3">
               <Button className="border-0 text-gray-700 bg-transprent font-bold" pill>
-                Sign In
+                Login
               </Button>
               <Button className="bg-sky-950 text-white border-0" pill>
                 Register
