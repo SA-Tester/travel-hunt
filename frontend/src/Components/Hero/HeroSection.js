@@ -50,10 +50,18 @@ const HeroSection = () => {
             >
               Hotels
             </Button>
-            <Button outline gradientDuoTone="cyanToBlue" pill>
+            <Button
+              color="transparent"
+              className="text-gray-500 dark:text-white"
+              pill
+            >
               Resturents
             </Button>
-            <Button outline gradientDuoTone="cyanToBlue" pill>
+            <Button
+              color="transparent"
+              className="text-gray-500 dark:text-white"
+              pill
+            >
               Places
             </Button>
           </div>

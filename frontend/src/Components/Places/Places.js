@@ -4,43 +4,113 @@ import PlacesCard from "./PlacesCard";
 const Places = (props) => {
   return (
     <div className="container mx-auto my-5 md:px-2 lg:px-24 sm:px-2">
-      <div className="container ">
-        <div className="flex flex-row justify-between items-center py-2">
-          <h2 class="text-lg font-medium leading-none tracking-tight text-gray-700 md:text-3xl md:font-bold dark:text-white">
-            {props.props["name"]}
+      <div className="container md:px-2 lg:px-24 sm:px-2">
+        <div className="flex flex-column justify-between items-center py-2">
+          <h2 class="py-4 text-3xl font-medium leading-none tracking-tight text-gray-700 md:text-3xl md:font-bold dark:text-white">
+            Destination Gallery
+            <hr className="w-[10vw] border-5 border-blue-400 h-[12px]"></hr>
           </h2>
-
-          <button class="relative group cursor-pointer text-sky-50  overflow-hidden h-8 w-24 rounded-2xl bg-sky-800 p-2 flex justify-center items-center font-light">
-            <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900"></div>
-            <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-800"></div>
-            <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700"></div>
-            <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
-            <p class="z-10">See more</p>
-          </button>
+          <h6 className="w-11/12 md:w-4/6 lg:w-3/6 text-center text-gray-400">
+            Embark on a Digital Odyssey at Travel Hunt! Explore a world of
+            information, inspiration, and discovery. Your journey to curated
+            content begins here.
+          </h6>
         </div>
-        <hr className="w-[10vw] border-5 border-blue-400 h-[12px]"></hr>
-        <div className="flex flex-wrap gap-1">
-          <Button color="tranparent" className="text-sky-400">
-            Family
-          </Button>
-          <Button color="tranparent" className="text-gray-400 hover:text-sky-950">
-            Adventure
-          </Button>
-          <Button color="tranparent" className="text-gray-400 hover:text-sky-950">
-            Road Trip
-          </Button>
-          <Button color="tranparent" className="text-gray-400 hover:text-sky-950">
-            Hiking
-          </Button>
+        <div className="flex flex-col md:flex-row justify-between items-center py-2">
+          <div className="flex items-center py-4 md:py-8 flex-wrap gap-2">
+            <Button
+              className="text-sky-400 bg-transparent"
+              pill
+              outline
+              size="sm"
+            >
+              Family
+            </Button>
+            <Button
+              color="tranparent"
+              size="sm"
+              className="text-gray-400 hover:text-sky-950"
+              pill
+            >
+              Adventure
+            </Button>
+            <Button
+              color="tranparent"
+              size="sm"
+              className="text-gray-400 hover:text-sky-950"
+              pill
+            >
+              Road Trip
+            </Button>
+            <Button
+              color="tranparent"
+              size="sm"
+              className="text-gray-400 hover:text-sky-950"
+              pill
+            >
+              Hiking
+            </Button>
+          </div>
+          <div className="hidden md:block">
+            <button class="relative group cursor-pointer text-sky-50  overflow-hidden h-8 w-24 rounded-2xl bg-sky-800 p-2 flex justify-center items-center font-light">
+              <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900"></div>
+              <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-800"></div>
+              <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700"></div>
+              <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
+              <p class="z-10">See more</p>
+            </button>
+          </div>
         </div>
       </div>
       <div className="container mt-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          <PlacesCard />
-          <PlacesCard />
-          <PlacesCard />
-          <PlacesCard />
-          <PlacesCard />
+        <div class="grid grid-cols-2 grid-rows-4 md:grid-cols-4 gap-4">
+          <div className="md:row-span-2">
+            <PlacesCard />
+          </div>
+          <div className="md:row-span-3">
+            <PlacesCard />
+          </div>
+          <div>
+            <PlacesCard />
+          </div>
+          <div>
+            <PlacesCard />
+          </div>
+
+          <div>
+            <PlacesCard />
+          </div>
+          <div>
+            <PlacesCard />
+          </div>
+          <div>
+            <PlacesCard />
+          </div>
+          <div className="md:row-span-2">
+            <PlacesCard />
+          </div>
+
+          <div>
+            <PlacesCard />
+          </div>
+          <div>
+            <PlacesCard />
+          </div>
+          <div>
+            <PlacesCard />
+          </div>
+          <div>
+            <PlacesCard />
+          </div>
+        </div>
+        <div className="block md:hidden mt-3 flex justify-center">
+          <button className="relative group cursor-pointer text-sky-50  overflow-hidden h-8 w-24 rounded-2xl bg-sky-800 p-2 flex justify-center items-center font-light">
+            <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900"></div>
+            <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-800"></div>
+            <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700"></div>
+            <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
+            <p className="z-10">See more</p>
+          </button>
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ function NavBar() {
     <Flowbite theme={{ theme: CustomFlowbiteTheme }}>
       <Navbar
         fluid
-        className="bg-transparent dark:bg-slate-800 navcolor shadow-xl text-white"
+        className="bg-transparent dark:bg-slate-800 navcolor shadow-xl backdrop-blur-sm"
       >
         <Navbar.Brand as={Link} href="https://flowbite-react.com">
           <img
@@ -78,7 +78,10 @@ function NavBar() {
             </Dropdown>
           ) : (
             <div className="flex flex-wrap gap-2 border-s-2 px-3">
-              <Button className="border-0 text-gray-700 bg-transprent font-bold" pill>
+              <Button
+                className="border-0 text-gray-700 bg-transprent font-bold text-white"
+                pill
+              >
                 Sign In
               </Button>
               <Button className="bg-sky-950 text-white border-0" pill>

@@ -10,9 +10,9 @@ const PlacesCard = () => {
     
   };
   return (
-    <div class=" h-[250px] relative block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+    <div class="hover:scale-105 duration-500 h-[200px] md:h-full max-w-full relative block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
       <img
-        class="rounded-lg h-[250px]"
+        class="rounded-lg h-full"
         src="https://tecdn.b-cdn.net/img/new/slides/017.webp"
         alt=""
       />

@@ -5,6 +5,7 @@ import Helloworld from "../../HelloWorld";
 import HeroSection from "../Hero/HeroSection";
 import FooterCon from "../Footer/FooterCon";
 import Places from "../Places/Places";
+import Hotels from "../Places/Hotels";
 
 const Home = () => {
   const [result, setResult] = useState([]);
@@ -38,14 +39,15 @@ const Home = () => {
     //   <h3>Restaurant Name: {result.name}</h3>
     //   {/* Render additional restaurant details here */}
     // </div>
-    <>
+    <div className="dark:bg-slate-900">
       <NavBar />
       <HeroSection />
       <Places props={{ name: "Popular Places" }} />
-      <Places props={{ name: "Hotels Nearby" }} />
+      <Hotels />
+
       <FooterCon />
       {/* <Helloworld /> */}
-    </>
+    </div>
   );
 };
 
