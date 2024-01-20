@@ -1,6 +1,24 @@
 # Create your models here.
 
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    id = models.CharField(max_length=8, primary_key=True)
+    firstname = models.CharField(max_length=128)
+    lastname = models.CharField(max_length=128)
+    email = models.CharField(max_length=128)
+    password = models.CharField(max_length=128)
+    username = None
+    first_name = None
+    is_staff = None
+
+    USERNAME_FIELD = 'id'
+    REQUIRED_FIELDS = [id, firstname, lastname, email, password]
+
+    class Meta:
+        db_table = "user"
 
 
 class Country(models.Model):
@@ -31,14 +49,14 @@ class City(models.Model):
 
 
 class Location(models.Model):
-    id = models.CharField(max_length=64, primary_key=True)
+    id = models.CharField(max_length=8, primary_key=True)
     name = models.CharField(max_length=128)
     category = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
     latitude = models.DecimalField(max_digits=10, decimal_places=2)
     longitude = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.CharField(max_length=2048)
-    city_id = models.ForeignKey(
+    city = models.ForeignKey(
         City, on_delete=models.CASCADE)
 
     class Meta:
@@ -64,19 +82,7 @@ class Hotel(models.Model):
         db_table = "hotel"
 
 
-class User(models.Model):
-    id = models.CharField(max_length=8, primary_key=True)
-    firstname = models.CharField(max_length=128)
-    lastname = models.CharField(max_length=128)
-    email = models.CharField(max_length=128)
-    password = models.CharField(max_length=128)
-
-    class Meta:
-        db_table = "user"
-
-
 class Trip(models.Model):
-    id = models.CharField(max_length=8, primary_key=True)
     name = models.CharField(max_length=64, default="N/A")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="N/A")
     start = models.DateField(auto_now=False, auto_now_add=False, default="N/A")
