@@ -1,6 +1,34 @@
 import { Button, Card, Carousel, TextInput } from "flowbite-react";
 import "../Hero/hero.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    axios
+      .get("http://localhost:8000/api/check_city/" + formData.get("search"))
+      .then((response) => {
+        if (response.status === 200) {
+          navigate(`/city?c=${formData.get("search")}`, { replace: true });
+        }
+      })
+      .catch((error) => {
+        if (error?.response?.status === 404) {
+          toast.error("City not found");
+        } else {
+          toast.error("An error occured. Code: " + error?.response?.status);
+        }
+      });
+    // console.log(formData.get("search"));
+  };
+
   return (
     <div className="bg-red-100 relative h-screen md:h-[80vh] lg:h-[80vh]">
       <div className="h-screen md:h-full lg:h-full">
@@ -59,12 +87,20 @@ const HeroSection = () => {
           </div>
         </p>
         <p className="font-normal text-gray-700 dark:text-gray-400">
-          <form className="grid grid-cols-6  gap-1 grid-flow-row-dense">
+          <form
+            className="grid grid-cols-6  gap-1 grid-flow-row-dense"
+            onSubmit={(e) => handleSearch(e)}
+          >
             <div className="col-span-4 md:col-span-5 lg:col-span-5">
-              <TextInput id="search" type="search" placeholder="Search" />
+              <TextInput
+                id="search"
+                name="search"
+                type="search"
+                placeholder="Search"
+              />
             </div>
             <div className="col-span-2 md:col-span-1 lg:col-span-1">
-              <button className="search-button">
+              <button className="search-button" type="submit">
                 <svg
                   className="svgIcon"
                   viewBox="0 0 512 512"
