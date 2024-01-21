@@ -1,22 +1,58 @@
 import React from "react";
+import axios from "axios";
 import background from "../../images/signup-bg.jpg";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
+// Function handling the form submission
 const Signup = () => {
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    formData.append("submit", "signup");
+
+    await axios
+      .post("http://localhost:8000/api/validate_signup", formData)
+      .then((response) => {
+        if (response.status === 201) {
+          //this.setState({ user });
+          toast.success("Data added successfully");
+          {
+            navigate("/login", { replace: true });
+          }
+        } else if (response.status === 500) {
+          //this.setState({ error });
+          toast.error("ERROR: " + response.data["error"]);
+        } else {
+          //this.setState({ error });
+          toast.error("ERROR: Invalid Data");
+        }
+      })
+      .catch((error) => {
+        //this.setState({ error });
+        toast.error("ERROR: " + "Passwords does not match");
+        console.log(error?.response?.status);
+      });
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={(e) => handleSignup(e)}>
         <div
-          className="grid grid-cols-1 h-full content-center bg-cover h-screen"
+          className="grid grid-cols-1 h-full content-center bg-cover h-screen md:w-full"
           style={{ backgroundImage: `url(${background})` }}
         >
-          <div className="grid grid-cols-1 gap-3 container md:w-5/12 sm:w-full border-4 py-4 px-4 bg-zinc-100/50">
+          <div className="grid grid-cols-1 gap-3 container border-4 py-4 px-4 bg-zinc-100/50 md:w-5/12 sm:w-full">
             <h1 className="text-center font-extrabold text-4xl py-3">
               Sign Up
             </h1>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="grid grid-cols-1 justify-items-stretch">
-                <label for="firstname" className="py-2 font-bold">
+                <label htmlFor="firstname" className="py-2 font-bold">
                   First Name
                 </label>
                 <input
@@ -25,10 +61,11 @@ const Signup = () => {
                   id="firstname"
                   placeholder="First Name"
                   className="rounded-lg"
+                  required
                 />
               </div>
               <div className="grid grid-cols-1 justify-items-stretch">
-                <label for="lastname" className="py-2 font-bold">
+                <label htmlFor="lastname" className="py-2 font-bold">
                   Last Name
                 </label>
                 <input
@@ -37,11 +74,12 @@ const Signup = () => {
                   id="lastname"
                   placeholder="Last Name"
                   className="rounded-lg"
+                  required
                 />
               </div>
             </div>
 
-            <label for="email" className="font-bold">
+            <label htmlFor="email" className="font-bold">
               Email
             </label>
             <input
@@ -50,9 +88,10 @@ const Signup = () => {
               id="email"
               placeholder="Email"
               className="rounded-lg"
+              required
             />
 
-            <label for="password1" className="font-bold">
+            <label htmlFor="password1" className="font-bold">
               Enter Password
             </label>
             <input
@@ -61,9 +100,10 @@ const Signup = () => {
               id="password1"
               placeholder="Password"
               className="rounded-lg"
+              required
             />
 
-            <label for="password2" className="font-bold">
+            <label htmlFor="password2" className="font-bold">
               Confirm Password
             </label>
             <input
@@ -72,6 +112,7 @@ const Signup = () => {
               id="password2"
               placeholder="Confirm Password"
               className="rounded-lg"
+              required
             />
 
             <input
