@@ -2,8 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('get_country/<str:country_name>',
-         views.get_country, name='get_country'),
+    path('check_city/<str:city_name>', views.check_city, name="check_city"),
+    
+    path('get_city/<str:city_name>',
+         views.get_city, name='get_city'),
 
     path('validate_signup',
          views.validate_signup, name='validate_signup'),
