@@ -1,4 +1,4 @@
-import { Button, Card, Carousel } from "flowbite-react";
+import { Button } from "flowbite-react";
 import PlacesCard from "./PlacesCard";
 
 const Places = (props) => {

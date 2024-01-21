@@ -1,4 +1,4 @@
-import { Button, Card, Carousel, Label, TextInput } from "flowbite-react";
+import { Button, Card, Carousel, TextInput } from "flowbite-react";
 import "../Hero/hero.css";
 const HeroSection = () => {
   return (
@@ -50,12 +50,8 @@ const HeroSection = () => {
             >
               Hotels
             </Button>
-            <Button
-              color="transparent"
-              className="text-gray-500 dark:text-white"
-              pill
-            >
-              Resturents
+            <Button outline gradientDuoTone="cyanToBlue" pill>
+              Restaurants
             </Button>
             <Button
               color="transparent"

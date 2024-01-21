@@ -1,11 +1,11 @@
 import NavBar from "../NavBar/Navbar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import Helloworld from "../../HelloWorld";
 import HeroSection from "../Hero/HeroSection";
 import FooterCon from "../Footer/FooterCon";
 import Places from "../Places/Places";
 import Hotels from "../Places/Hotels";
+
 
 const Home = () => {
   const [result, setResult] = useState([]);

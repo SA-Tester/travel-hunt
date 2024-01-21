@@ -7,12 +7,23 @@ import {
   Navbar,
 } from "flowbite-react";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Image from "../../logo.png";
 import "../NavBar/nav.css";
 
 function NavBar() {
+  const navigate = useNavigate();
+
+  const navigateToLogin = () => {
+    navigate("/login");
+  };
+
+  const navigateTosignup = () => {
+    navigate("/signup");
+  };
+
   const [authstate, setAuthState] = useState(false);
+
   const CustomFlowbiteTheme = {
     nav: {
       color: {
@@ -39,8 +50,8 @@ function NavBar() {
           <Navbar.Link href="#" active className="text-white">
             Home
           </Navbar.Link>
-          <Navbar.Link as={Link} href="#" className="text-white">
-            About
+          <Navbar.Link href="/planner" className="text-white">
+            TripPlanner
           </Navbar.Link>
           <Navbar.Link href="#" className="text-white">
             Services
@@ -79,12 +90,17 @@ function NavBar() {
           ) : (
             <div className="flex flex-wrap gap-2 border-s-2 px-3">
               <Button
-                className="border-0 text-gray-700 bg-transprent font-bold text-white"
+                className="border-0 text-gray-700 bg-transprent font-bold"
+                onClick={navigateToLogin}
                 pill
               >
-                Sign In
+                Login
               </Button>
-              <Button className="bg-sky-950 text-white border-0" pill>
+              <Button
+                className="bg-sky-950 text-white border-0"
+                onClick={navigateTosignup}
+                pill
+              >
                 Register
               </Button>
             </div>
