@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User
+from .models import Country
 
 
 # The Serializer user for Signup functionality
@@ -20,3 +21,9 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class CountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = '__all__'

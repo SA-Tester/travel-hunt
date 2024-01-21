@@ -8,13 +8,13 @@ class User(AbstractUser):
     id = models.CharField(max_length=8, primary_key=True)
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
-    email = models.CharField(max_length=128)
+    email = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=128)
     username = None
     first_name = None
     is_staff = None
 
-    USERNAME_FIELD = 'id'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [id, firstname, lastname, email, password]
 
     class Meta:
