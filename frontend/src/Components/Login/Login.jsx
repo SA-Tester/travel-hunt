@@ -1,10 +1,43 @@
 import React from "react";
 import background from "../../images/login-bg.jpg";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    await axios
+      .post("http://localhost:8000/token/", formData, {headers: {'Content-Type': 'application/json'}, withCredentials: false})
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.clear();
+          localStorage.setItem("access_token", response.data["access"]);
+          localStorage.setItem("refresh_token", response.data["refresh"]);
+          axios.defaults.headers.common["Authorization"] = `Bearer ${response.data['access']}`;
+
+          navigate("/traveller_home", { replace: true });
+        } 
+      })
+      .catch((error) => {
+        if(error?.response?.status === 401){
+          toast.error(
+            error?.response?.status + "Unauthorized. Check your credentials"
+          );
+        }
+        else{
+          toast.error("Sorry an error occured.");
+        }
+      });
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={(e) => handleLogin(e)}>
         <div
           className="grid grid-cols-1 h-screen content-center bg-cover"
           style={{ backgroundImage: `url(${background})` }}
@@ -12,7 +45,7 @@ const Login = () => {
           <div className="grid grid-cols-1 gap-3 container border-4 py-4 px-4 bg-zinc-100/25 h-fit lg:w-1/3 md:w-full">
             <h1 className="text-center font-extrabold text-4xl py-3">Login</h1>
 
-            <label for="email" className="font-bold">
+            <label htmlFor="email" className="font-bold">
               Email
             </label>
             <input
@@ -23,7 +56,7 @@ const Login = () => {
               className="rounded-lg border-gray-100 focus:border-stone-900"
             />
 
-            <label for="password" className="font-bold">
+            <label htmlFor="password" className="font-bold">
               Password
             </label>
             <input
