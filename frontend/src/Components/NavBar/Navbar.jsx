@@ -16,11 +16,11 @@ function NavBar() {
 
   const navigateToLogin = () => {
     navigate("/login");
-  }
+  };
 
   const navigateTosignup = () => {
     navigate("/signup");
-  }
+  };
 
   const [authstate, setAuthState] = useState(false);
   const CustomFlowbiteTheme = {
@@ -88,10 +88,18 @@ function NavBar() {
             </Dropdown>
           ) : (
             <div className="flex flex-wrap gap-2 border-s-2 px-3">
-              <Button className="border-0 text-gray-700 bg-transprent font-bold" onClick={navigateToLogin} pill>
+              <Button
+                className="border-0 text-white bg-slate-800 font-bold"
+                onClick={navigateToLogin}
+                pill
+              >
                 Login
               </Button>
-              <Button className="bg-sky-950 text-white border-0" onClick={navigateTosignup} pill>
+              <Button
+                className="bg-sky-950 text-white border-0"
+                onClick={navigateTosignup}
+                pill
+              >
                 Register
               </Button>
             </div>
