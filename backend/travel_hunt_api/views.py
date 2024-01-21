@@ -1,25 +1,32 @@
 # Create your views here.
 
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer
+from .serializers import CountrySerializer
 from .models import Country
 from .models import User
 
 
 @api_view(['GET'])
 def get_country(request, country_name):
-    country = Country.objects.filter(name=country_name).values()
+    countryQuery = Country.objects.filter(name=country_name)
+    countrySerializer = CountrySerializer(countryQuery, many=True)
+    countryData = countrySerializer.data
 
-    if(len(country) > 0):
+    if(len(countryData) > 0):
         return Response(
-            {"id": country[0]["id"],
-             "name": country[0]["name"],
-             "code": country[0]["code"],
-             "description": country[0]["description"],
-             "flag": country[0]["flag"]
+            {"id": countryData[0]["id"],
+             "name": countryData[0]["name"],
+             "code": countryData[0]["code"],
+             "description": countryData[0]["description"],
+             "flag": countryData[0]["flag"]
              }
         )
 
@@ -84,3 +91,28 @@ def validate_signup(request):
             {"error": f"Password does not match"},
             status=status.HTTP_406_NOT_ACCEPTABLE
         )
+
+
+class LoginView(APIView):
+    # Home View is only available for authenticated users
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        # print(request.user)
+        content = {"message": "Hello from JWT"}
+
+        return Response(content)
+
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated,]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
