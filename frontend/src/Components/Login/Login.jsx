@@ -1,26 +1,95 @@
 import React from "react";
+import background from "../../images/login-bg.jpg";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    return(
-        <div className="grid grid-cols-1 h-screen bg-gradient-to-r from-sky-500 to-indigo-500 content-center">
-            <div className="grid grid-cols-1 container border-4 py-4 px-4 bg-white h-fit lg:w-1/3 md:w-full">
-                <h1 className="text-center font-extrabold text-4xl py-3">Login</h1>
+  const navigate = useNavigate();
 
-                <label for="email" className="py-3 font-bold">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter Email" className="rounded-lg border-gray-100 focus:border-stone-900"/>
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-                <label for="password" className="py-3 font-bold">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password" className="mb-4 rounded-lg border-gray-100 focus:border-stone-900"/>
+    const formData = new FormData(e.target);
+    await axios
+      .post("http://localhost:8000/token/", formData, {headers: {'Content-Type': 'application/json'}, withCredentials: false})
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.clear();
+          localStorage.setItem("access_token", response.data["access"]);
+          localStorage.setItem("refresh_token", response.data["refresh"]);
+          axios.defaults.headers.common["Authorization"] = `Bearer ${response.data['access']}`;
 
-                <input type="submit" name="login" value="Login" className="py-3 border-b-4 place-content-center font-semibold bg-cyan-600 text-xl text-white rounded-lg"/>
+          navigate("/traveller_home", { replace: true });
+        } 
+      })
+      .catch((error) => {
+        if(error?.response?.status === 401){
+          toast.error(
+            error?.response?.status + "Unauthorized. Check your credentials"
+          );
+        }
+        else{
+          toast.error("Sorry an error occured.");
+        }
+      });
+  };
 
-                <div className="grid grid-cols-2 mt-4">
-                    <a href="/signup" className="font-bold underline text-blue-700">Sign Up</a>
-                    <a href="" className="text-right font-bold underline text-blue-700">Forgot Password?</a>
-                </div>
+  return (
+    <div>
+      <form onSubmit={(e) => handleLogin(e)}>
+        <div
+          className="grid grid-cols-1 h-screen content-center bg-cover"
+          style={{ backgroundImage: `url(${background})` }}
+        >
+          <div className="grid grid-cols-1 gap-3 container border-4 py-4 px-4 bg-zinc-100/25 h-fit lg:w-1/3 md:w-full">
+            <h1 className="text-center font-extrabold text-4xl py-3">Login</h1>
+
+            <label htmlFor="email" className="font-bold">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter Email"
+              className="rounded-lg border-gray-100 focus:border-stone-900"
+            />
+
+            <label htmlFor="password" className="font-bold">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter Password"
+              className="rounded-lg border-gray-100 focus:border-stone-900"
+            />
+
+            <input
+              type="submit"
+              name="login"
+              value="Login"
+              className="py-2 border-b-4 place-content-center font-semibold bg-cyan-600 text-xl text-white rounded-lg"
+            />
+
+            <div className="grid grid-cols-2 mt-4">
+              <a href="/signup" className="font-bold underline text-blue-700">
+                Sign Up
+              </a>
+              <a
+                href=""
+                className="text-right font-bold underline text-blue-700"
+              >
+                Forgot Password?
+              </a>
             </div>
+          </div>
         </div>
-    );
-}
+      </form>
+    </div>
+  );
+};
 
 export default Login;
