@@ -12,24 +12,28 @@ const Login = () => {
 
     const formData = new FormData(e.target);
     await axios
-      .post("http://localhost:8000/token/", formData, {headers: {'Content-Type': 'application/json'}, withCredentials: false})
+      .post("http://localhost:8000/token/", formData, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: false,
+      })
       .then((response) => {
         if (response.status === 200) {
           localStorage.clear();
           localStorage.setItem("access_token", response.data["access"]);
           localStorage.setItem("refresh_token", response.data["refresh"]);
-          axios.defaults.headers.common["Authorization"] = `Bearer ${response.data['access']}`;
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${response.data["access"]}`;
 
           navigate("/traveller_home", { replace: true });
-        } 
+        }
       })
       .catch((error) => {
-        if(error?.response?.status === 401){
+        if (error?.response?.status === 401) {
           toast.error(
             error?.response?.status + "Unauthorized. Check your credentials"
           );
-        }
-        else{
+        } else {
           toast.error("Sorry an error occured.");
         }
       });
@@ -79,10 +83,10 @@ const Login = () => {
                 Sign Up
               </a>
               <a
-                href=""
+                href="/admin_login"
                 className="text-right font-bold underline text-blue-700"
               >
-                Forgot Password?
+                Do you own a business?
               </a>
             </div>
           </div>
