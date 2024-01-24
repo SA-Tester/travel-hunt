@@ -141,7 +141,7 @@ def fillLocation(start, end):
     i = 1
     data = []
 
-    query = "INSERT INTO location(id, name, category, description, image1, image2, image3, city_id) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+    query = "INSERT INTO location(id, name, category, description, image1, image2, image3, city_id) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
 
     for row in csvreader:
         if i > start and i < end:  # CHANGE THE VALUE ACCORDINGLY FROM 0 - 44619 NOW: 100 - 501
@@ -156,7 +156,6 @@ def fillLocation(start, end):
                 values = (id, locationName, category, description,
                           images[0], images[1], images[2], city_id)
 
-                print(values)
                 data.append(values)
 
                 print(locationName + " is created. " + str(i) +
@@ -165,44 +164,44 @@ def fillLocation(start, end):
             except:
                 "Error occured when commiting " + locationName + " - " + str(i)
 
-    #         if len(data) > 5:
-    #             try:
-    #                 # INSERT DATA TO THE DATABASE AS A BATCH
-    #                 dbcursor.executemany(query, data)
-    #                 db.commit()
-    #                 nrows = dbcursor.rowcount
-    #                 print("\n", nrows,
-    #                       "Records Inserted Successfully\n")
-    #                 rowCount += nrows
-    #                 data.clear()
+            if len(data) > 5:
+                try:
+                    # INSERT DATA TO THE DATABASE AS A BATCH
+                    dbcursor.executemany(query, data)
+                    db.commit()
+                    nrows = dbcursor.rowcount
+                    print("\n", nrows,
+                          "Records Inserted Successfully\n")
+                    rowCount += nrows
+                    data.clear()
 
-    #             except Exception as exception:
-    #                 print("Error occured when inserting", i)
-    #                 print(exception)
-    #                 db.rollback()
+                except Exception as exception:
+                    print("Error occured when inserting", i)
+                    print(exception)
+                    db.rollback()
 
-    #     i += 1
+        i += 1
 
-    # # TO STORE UNCOMMITTED RESULTS IN THE DB WHICH ARE WAITING COMPLETION OF 10 ARRAY ITEMS
-    # if len(data) > 0:
-    #     try:
-    #         # INSERT DATA TO THE DATABASE AS A BATCH
-    #         dbcursor.executemany(query, data)
-    #         db.commit()
-    #         nrows = dbcursor.rowcount
-    #         print("\n", nrows,
-    #               "Records Inserted Successfully\n")
-    #         rowCount += nrows
-    #         data.clear()
+    # TO STORE UNCOMMITTED RESULTS IN THE DB WHICH ARE WAITING COMPLETION OF 10 ARRAY ITEMS
+    if len(data) > 0:
+        try:
+            # INSERT DATA TO THE DATABASE AS A BATCH
+            dbcursor.executemany(query, data)
+            db.commit()
+            nrows = dbcursor.rowcount
+            print("\n", nrows,
+                  "Records Inserted Successfully\n")
+            rowCount += nrows
+            data.clear()
 
-    #     except Exception as exception:
-    #         print("Error occured when inserting", i)
-    #         print(exception)
-    #         db.rollback()
+        except Exception as exception:
+            print("Error occured when inserting", i)
+            print(exception)
+            db.rollback()
 
-    # file.close()
-    # dbcursor.close()
-    # db.close()
+    file.close()
+    dbcursor.close()
+    db.close()
 
 
 if __name__ == "__main__":
