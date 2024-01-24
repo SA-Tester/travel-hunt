@@ -121,6 +121,12 @@ const Signup = () => {
               value="Sign up"
               className="border-b-4 text-white bg-cyan-600 rounded-lg py-2 place-content-center"
             />
+
+            <div className="grid grid-cols-2 mt-2">
+              <a href="/login" className="font-bold underline text-blue-700">
+                Already a user?
+              </a>
+            </div>
           </div>
         </div>
       </form>
