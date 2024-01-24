@@ -53,7 +53,9 @@ class Location(models.Model):
     name = models.CharField(max_length=128)
     category = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
-    image = models.CharField(max_length=2048)
+    image1 = models.CharField(max_length=2048)
+    image2 = models.CharField(max_length=2048)
+    image3 = models.CharField(max_length=2048)
     city = models.ForeignKey(
         City, on_delete=models.CASCADE)
 
