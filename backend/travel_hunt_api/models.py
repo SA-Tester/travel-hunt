@@ -53,8 +53,6 @@ class Location(models.Model):
     name = models.CharField(max_length=128)
     category = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
-    latitude = models.DecimalField(max_digits=10, decimal_places=2)
-    longitude = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.CharField(max_length=2048)
     city = models.ForeignKey(
         City, on_delete=models.CASCADE)
