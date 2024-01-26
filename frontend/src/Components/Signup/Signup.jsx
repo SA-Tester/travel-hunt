@@ -20,9 +20,8 @@ const Signup = () => {
         if (response.status === 201) {
           //this.setState({ user });
           toast.success("Data added successfully");
-          {
-            navigate("/login", { replace: true });
-          }
+          navigate("/login", { replace: true });
+
         } else if (response.status === 500) {
           //this.setState({ error });
           toast.error("ERROR: " + response.data["error"]);
@@ -33,7 +32,7 @@ const Signup = () => {
       })
       .catch((error) => {
         //this.setState({ error });
-        toast.error("ERROR: " + "Passwords does not match");
+        toast.error("ERROR: Passwords does not match");
         console.log(error?.response?.status);
       });
   };

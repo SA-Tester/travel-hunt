@@ -1,32 +1,32 @@
 import { Button, Card, Carousel, TextInput } from "flowbite-react";
 import "../Hero/hero.css";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const HeroSection = () => {
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
+  const handleSearch = async(e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
 
-    axios
+    await axios
       .get("http://localhost:8000/api/check_city/" + formData.get("search"))
       .then((response) => {
         if (response.status === 200) {
-          navigate(`/city?c=${formData.get("search")}`, { replace: true });
+          navigate(`/city?c=${response.data}`, { replace: true });
         }
       })
       .catch((error) => {
         if (error?.response?.status === 404) {
           toast.error("City not found");
         } else {
-          toast.error("An error occured. Code: " + error?.response?.status);
+          toast.error("An error occurred. Code: " + error?.response?.status);
         }
       });
-    // console.log(formData.get("search"));
+    //console.log(formData.get("search"));
   };
 
   return (
@@ -92,12 +92,14 @@ const HeroSection = () => {
             onSubmit={(e) => handleSearch(e)}
           >
             <div className="col-span-4 md:col-span-5 lg:col-span-5">
+
               <TextInput
-                id="search"
-                name="search"
-                type="search"
-                placeholder="Search"
+                  id="search"
+                  name="search"
+                  type="search"
+                  placeholder = "Enter City Name and Country Name"
               />
+
             </div>
             <div className="col-span-2 md:col-span-1 lg:col-span-1">
               <button className="search-button" type="submit">
