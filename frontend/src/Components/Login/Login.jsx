@@ -85,10 +85,10 @@ const Login = () => {
                 Sign Up
               </a>
               <a
-                href="/admin_login"
-                className="text-right font-bold underline text-blue-700"
+                href="/admin-login"
+                className="font-bold underline text-blue-700 text-right"
               >
-                Do you own a business?
+                Log In as a Business User
               </a>
             </div>
           </div>
