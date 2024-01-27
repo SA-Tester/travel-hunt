@@ -10,6 +10,7 @@ import TravllerHome from "./Components/HomePage/TravellerHome";
 import Login from "./Components/Login/Login";
 import Signup from "./Components/Signup/Signup";
 import { Logout } from "./Components/Login/Logout";
+import AllPlaces from "./Components/Places/AllPlaces";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/traveller_home" element={<TravllerHome />} />
           <Route path="/planner" element={<TripBuilder />} />
+          <Route path="/allplaces" element={<AllPlaces />} />
         </Routes>
       </Layout>
     </BrowserRouter>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import TripNameForm from "../Components/TripPlaner/TripNameForm";
 
 import DatePickerComponent from "../Components/TripPlaner/DatePickerComponent";
+import PlaceSelectForm from "../Components/TripPlaner/PlacesSelectForm";
 
 const TripBuilder = () => {
   const [slidestate, setSlideState] = useState(0);
@@ -142,7 +143,11 @@ const SecondSlide = () => {
   );
 };
 const ThirdSlide = () => {
-  return <div className="mt-[15vh]">3</div>;
+  return (
+    <div>
+      <PlaceSelectForm />
+    </div>
+  );
 };
 const ForthSlide = () => {
   return <div className="mt-[15vh]">4</div>;

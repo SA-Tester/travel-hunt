@@ -35,7 +35,7 @@ function NavBar() {
     <Flowbite theme={{ theme: CustomFlowbiteTheme }}>
       <Navbar
         fluid
-        className="bg-transparent dark:bg-slate-800 navcolor shadow-xl backdrop-blur-sm fixed top-0"
+        className="bg-white bg-opacity-50 backdrop-blur-lg dark:bg-slate-800 navcolor shadow-xl fixed top-0"
       >
         <Navbar.Brand as={Link} href="https://flowbite-react.com">
           <img
