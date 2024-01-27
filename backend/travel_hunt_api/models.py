@@ -8,19 +8,21 @@ class User(AbstractUser):
     id = models.CharField(max_length=8, primary_key=True)
     email = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=128)
+    role = models.CharField(max_length=10)
     username = None
     first_name = None
     is_staff = None
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [id, email, password]
+    REQUIRED_FIELDS = [id, email, password, role]
 
     class Meta:
         db_table = "user"
 
 
 class Traveller(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
     mobile = models.CharField(max_length=10)
@@ -30,14 +32,13 @@ class Traveller(models.Model):
 
 
 class HotelOwner(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
     business_address = models.CharField(max_length=256)
-    personal_tel = models.CharField(max_length=10)
     business_tel = models.CharField(max_length=10)
-    business_email = models.CharField(max_length=128)
-    business_reg_no = models.CharField(max_length=10)
+    business_reg_no = models.CharField(max_length=25)
 
     class Meta:
         db_table = "hotel_owner"

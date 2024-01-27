@@ -20,5 +20,5 @@ def placesInCity(city_id):
 
 
 def hotelsInCity(city_id):
-
+    
     return
