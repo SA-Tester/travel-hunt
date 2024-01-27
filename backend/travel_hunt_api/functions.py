@@ -1,5 +1,5 @@
 from .models import Location
-import json
+
 
 def placesInCity(city_id):
     data = []
@@ -17,3 +17,8 @@ def placesInCity(city_id):
         data.append(element)
 
     return data
+
+
+def hotelsInCity(city_id):
+
+    return
