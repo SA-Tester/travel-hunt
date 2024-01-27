@@ -12,16 +12,14 @@ const Signup = () => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    formData.append("submit", "signup");
 
     await axios
-      .post("http://localhost:8000/api/validate_signup", formData)
+      .post("http://localhost:8000/api/validate_user_signup", formData)
       .then((response) => {
         if (response.status === 201) {
           //this.setState({ user });
           toast.success("Data added successfully");
           navigate("/login", { replace: true });
-
         } else if (response.status === 500) {
           //this.setState({ error });
           toast.error("ERROR: " + response.data["error"]);
@@ -86,6 +84,18 @@ const Signup = () => {
               name="email"
               id="email"
               placeholder="Email"
+              className="rounded-lg"
+              required
+            />
+
+            <label htmlFor="mobile" className="font-bold">
+              Phone
+            </label>
+            <input
+              type="tel"
+              name="mobile"
+              id="mobile"
+              placeholder="Phone"
               className="rounded-lg"
               required
             />

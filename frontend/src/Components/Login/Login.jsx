@@ -33,6 +33,8 @@ const Login = () => {
           toast.error(
             error?.response?.status + "Unauthorized. Check your credentials"
           );
+        } else if (error?.response?.status === 400) {
+          toast.error(error?.response?.status + "User not found");
         } else {
           toast.error("Sorry an error occured.");
         }
