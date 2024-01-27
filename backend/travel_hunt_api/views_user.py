@@ -36,8 +36,6 @@ def validate_signup(request):
             recieved_data.pop('password1')
             recieved_data.pop('password2')
 
-            print(recieved_data)
-
             # Make data required for the User and Traveller tables
             # copy module is used to prevent making references to the original value
             user_data = copy.copy(recieved_data)
@@ -58,6 +56,7 @@ def validate_signup(request):
             # Update the data with id and password
             user_data.update({'id': id})
             user_data.update({'password': password1})
+            user_data.update({'role': "general"})
             traveller_data.update({'user': id})
 
             userSerializer = UserSerializer(data=user_data)
