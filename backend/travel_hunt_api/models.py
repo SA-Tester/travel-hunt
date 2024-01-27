@@ -6,8 +6,6 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     id = models.CharField(max_length=8, primary_key=True)
-    firstname = models.CharField(max_length=128)
-    lastname = models.CharField(max_length=128)
     email = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=128)
     username = None
@@ -15,10 +13,34 @@ class User(AbstractUser):
     is_staff = None
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [id, firstname, lastname, email, password]
+    REQUIRED_FIELDS = [id, email, password]
 
     class Meta:
         db_table = "user"
+
+
+class Traveller(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    firstname = models.CharField(max_length=128)
+    lastname = models.CharField(max_length=128)
+    mobile = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = "traveller"
+
+
+class HotelOwner(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    firstname = models.CharField(max_length=128)
+    lastname = models.CharField(max_length=128)
+    business_address = models.CharField(max_length=256)
+    personal_tel = models.CharField(max_length=10)
+    business_tel = models.CharField(max_length=10)
+    business_email = models.CharField(max_length=128)
+    business_reg_no = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = "hotel_owner"
 
 
 class Country(models.Model):
