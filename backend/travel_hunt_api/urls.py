@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('check_city/<str:city_name>', views.check_city, name="check_city"),
     
-    path('get_city/<str:city_name>',
+    path('get_city/<str:city_id>',
          views.get_city, name='get_city'),
 
     path('validate_signup',

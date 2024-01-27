@@ -9,60 +9,61 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer
-from .serializers import CountrySerializer
-from .serializers import CitySerializer
-from .models import Country
 from .models import City
 from .models import User
+from .functions import placesInCity
 
 
 @api_view(['GET'])
 def check_city(request, city_name):
-    cityQuery = City.objects.filter(name=city_name)
-    citySerializer = CitySerializer(cityQuery, many=True)
-    cityData = citySerializer.data
+    requested_city_id = ""
+    country = ""
 
-    if(len(cityData) > 0):
-        return Response(status=status.HTTP_200_OK)
+    arr = city_name.split(" ", 1)
+    if(len(arr) > 1):
+        country = arr[1]
+
+    cityWithCountry = City.objects.select_related('country')
+
+    for city in cityWithCountry:
+        if ((city.name.lower() == arr[0].lower() and city.country.name.lower() == country.lower()) or
+            (city.name.lower() == arr[0].lower())):
+            requested_city_id = city.id
+
+    if(requested_city_id != ""):
+        return Response(requested_city_id, status=status.HTTP_200_OK)
 
     else:
         return Response({"msg": "An error occured"}, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['GET'])
-def get_city(request, city_name):
-    cityQuery = City.objects.filter(name=city_name)
-    citySerializer = CitySerializer(cityQuery, many=True)
-    cityData = citySerializer.data
+def get_city(request, city_id):
+    cityWithCountry = City.objects.select_related('country').filter(id=city_id)
+    places = placesInCity(city_id)
+    
+    for city in cityWithCountry:
+        return Response(
+            {
+                "city_id": city.id,
+                "city_name": city.name,
+                "latitude": city.latitude,
+                "longitude": city.longitude,
+                "city_description": city.description,
+                "image1": city.image1,
+                "image2": city.image2,
+                "image3": city.image3,
+                "country_id": city.country.id,
+                "country_name": city.country.name,
+                "country_code": city.country.code,
+                "country_description": city.country.description,
+                "country_flag": city.country.flag,
+                "places": places
+            }
+        )
 
-    if(len(cityData) > 0):
-        countryQuery = Country.objects.filter(id=cityData[0]["country"])
-        countrySerializer = CountrySerializer(countryQuery, many=True)
-        countryData = countrySerializer.data
+    return Response({"msg": "An error occured"}, status=status.HTTP_404_NOT_FOUND)
 
-        if(len(countryData) > 0):
-            return Response(
-                {
-                    "city_id": cityData[0]["id"],
-                    "city_name": cityData[0]["name"],
-                    "latitude": cityData[0]["latitude"],
-                    "longitude": cityData[0]["longitude"],
-                    "city_description": cityData[0]["description"],
-                    "image1": cityData[0]["image1"],
-                    "image2": cityData[0]["image2"],
-                    "image3": cityData[0]["image3"],
-                    "country_id": countryData[0]["id"],
-                    "country_name": countryData[0]["name"],
-                    "country_code": countryData[0]["code"],
-                    "country_description": countryData[0]["description"],
-                    "country_flag": countryData[0]["flag"]
-                }
-            )
-        else:
-            return Response({"msg": "An error occured"}, status=status.HTTP_404_NOT_FOUND)
-
-    else:
-        return Response({"msg": "An error occured"}, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['POST'])
