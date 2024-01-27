@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 // Function handling the form submission
-const Signup = () => {
+const UserSignup = () => {
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
@@ -39,12 +39,12 @@ const Signup = () => {
     <div>
       <form onSubmit={(e) => handleSignup(e)}>
         <div
-          className="grid grid-cols-1 h-full content-center bg-cover h-screen md:w-full"
+          className="grid grid-cols-1 content-center bg-cover h-auto md:w-full"
           style={{ backgroundImage: `url(${background})` }}
         >
           <div className="grid grid-cols-1 gap-3 container border-4 py-4 px-4 bg-zinc-100/50 md:w-5/12 sm:w-full">
-            <h1 className="text-center font-extrabold text-4xl py-3">
-              Sign Up
+            <h1 className="text-center font-extrabold text-3xl py-3">
+              Traveller - Sign Up
             </h1>
 
             <div className="grid grid-cols-2 gap-3">
@@ -131,9 +131,15 @@ const Signup = () => {
               className="border-b-4 text-white bg-cyan-600 rounded-lg py-2 place-content-center"
             />
 
-            <div className="grid grid-cols-2 mt-2">
+            <div className="grid grid-cols-2 mt-4">
               <a href="/login" className="font-bold underline text-blue-700">
-                Already a user?
+                Alread registered?
+              </a>
+              <a
+                href="/admin-signup"
+                className="text-right font-bold underline text-blue-700"
+              >
+                Do you own a business?
               </a>
             </div>
           </div>
@@ -143,4 +149,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default UserSignup;
