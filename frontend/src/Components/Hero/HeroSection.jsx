@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const HeroSection = () => {
   const navigate = useNavigate();
 
-  const handleSearch = async(e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -69,41 +69,19 @@ const HeroSection = () => {
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           Navigate Your Next Adventure: Discover, Plan, Explore with Ease!
         </h5>
-        <p>
-          <div className="flex flex-wrap gap-2 border-s-2 px-3">
-            <Button
-              gradientDuoTone="purpleToBlue"
-              className="text-white border-0"
-              pill
-            >
-              Hotels
-            </Button>
-            <Button outline gradientDuoTone="cyanToBlue" pill>
-              Restaurants
-            </Button>
-            <Button
-              color="transparent"
-              className="text-gray-500 dark:text-white"
-              pill
-            >
-              Places
-            </Button>
-          </div>
-        </p>
+        
         <p className="font-normal text-gray-700 dark:text-gray-400">
           <form
             className="grid grid-cols-6  gap-1 grid-flow-row-dense"
             onSubmit={(e) => handleSearch(e)}
           >
             <div className="col-span-4 md:col-span-5 lg:col-span-5">
-
               <TextInput
-                  id="search"
-                  name="search"
-                  type="search"
-                  placeholder = "Enter City Name and Country Name"
+                id="search"
+                name="search"
+                type="search"
+                placeholder="Enter City Name and Country Name"
               />
-
             </div>
             <div className="col-span-2 md:col-span-1 lg:col-span-1">
               <button className="search-button" type="submit">

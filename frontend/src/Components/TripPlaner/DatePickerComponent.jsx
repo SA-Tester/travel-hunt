@@ -3,7 +3,7 @@ import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css";
 
-export default function DatePickerComponent() {
+export default function DatePickerComponent({ tripCallback }) {
   return (
     <div className="container mx-auto mt-8 w-[100vw]">
       <form className="max-w-md mx-auto p-4 bg-white">
@@ -29,6 +29,15 @@ export default function DatePickerComponent() {
             />
           </div>
         </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mt-3"
+          onClick={() => {
+            tripCallback(2);
+          }}
+        >
+          Next
+        </button>
       </form>
     </div>
   );

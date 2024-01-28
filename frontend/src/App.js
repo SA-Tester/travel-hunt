@@ -11,6 +11,7 @@ import Login from "./Components/Login/Login";
 import Signup from "./Components/Signup/Signup";
 import { Logout } from "./Components/Login/Logout";
 import AllPlaces from "./Components/Places/AllPlaces";
+import City from "./Components/SearchResults/City";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/city" element={<City />} /> */}
+          <Route path="/city" element={<City />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/signup" element={<Signup />} />

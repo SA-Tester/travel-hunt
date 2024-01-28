@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TripNameForm = ({ onSubmit }) => {
+const TripNameForm = ({ tripCallback }) => {
   const [tripName, setTripName] = useState("");
 
   const handleChange = (e) => {
@@ -9,7 +9,6 @@ const TripNameForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(tripName);
   };
 
   return (
@@ -33,8 +32,11 @@ const TripNameForm = ({ onSubmit }) => {
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          onClick={() => {
+            tripCallback(1);
+          }}
         >
-          Save Trip Name
+          Next
         </button>
       </form>
     </div>

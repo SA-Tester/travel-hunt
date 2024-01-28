@@ -35,31 +35,31 @@ function NavBar() {
     <Flowbite theme={{ theme: CustomFlowbiteTheme }}>
       <Navbar
         fluid
-        className="bg-white bg-opacity-50 backdrop-blur-lg dark:bg-slate-800 navcolor shadow-xl fixed top-0"
+        className="bg-white bg-opacity-10 backdrop-blur-lg dark:bg-slate-800 navcolor shadow-xl fixed top-0"
       >
         <Navbar.Brand as={Link} href="https://flowbite-react.com">
           <img
             src={Image}
-            className="mr-3 sm:h-9 h-px"
+            className="mr-3 sm:h-9 h-px mt-3"
             alt="Flowbite React Logo"
             style={{ height: "auto", width: "150px" }}
           />
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Navbar.Link href="#" active className="text-white">
+          <Navbar.Link href="/" active className="text-blue-900">
             Home
           </Navbar.Link>
-          <Navbar.Link href="/planner" className="text-white">
+          <Navbar.Link href="/planner" className="text-blue-900">
             TripPlanner
           </Navbar.Link>
-          <Navbar.Link href="#" className="text-white">
+          <Navbar.Link href="#" className="text-blue-900">
             Services
           </Navbar.Link>
-          <Navbar.Link href="#" className="text-white">
+          <Navbar.Link href="#" className="text-blue-900">
             Pricing
           </Navbar.Link>
-          <Navbar.Link href="#" className="text-white">
+          <Navbar.Link href="#" className="text-blue-900">
             Contact
           </Navbar.Link>
           {authstate ? (
@@ -88,7 +88,7 @@ function NavBar() {
               <Dropdown.Item>Sign out</Dropdown.Item>
             </Dropdown>
           ) : (
-            <div className="flex flex-wrap gap-2 border-s-2 px-3">
+            <div className="flex flex-wrap gap-2 border-s-2 px-3 border-blue-300">
               <Button
                 className="border-0 text-white bg-slate-800 font-bold"
                 onClick={navigateToLogin}
