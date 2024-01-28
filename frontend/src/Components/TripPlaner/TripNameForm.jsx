@@ -9,6 +9,10 @@ const TripNameForm = ({ tripCallback }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Update the tripData state in the parent component
+    tripCallback({ data: tripName, progress: 1 });
+    // Update progress
   };
 
   return (
@@ -32,9 +36,6 @@ const TripNameForm = ({ tripCallback }) => {
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-          onClick={() => {
-            tripCallback(1);
-          }}
         >
           Next
         </button>

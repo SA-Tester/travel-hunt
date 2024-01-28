@@ -15,8 +15,9 @@ const HeroSection = () => {
     await axios
       .get("http://localhost:8000/api/check_city/" + formData.get("search"))
       .then((response) => {
+        console.log(response);
         if (response.status === 200) {
-          navigate(`/city?c=${response.data}`, { replace: true });
+          navigate(`/city?c=${response.data["city_id"]}`, { replace: true });
         }
       })
       .catch((error) => {
@@ -69,7 +70,7 @@ const HeroSection = () => {
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           Navigate Your Next Adventure: Discover, Plan, Explore with Ease!
         </h5>
-        
+
         <p className="font-normal text-gray-700 dark:text-gray-400">
           <form
             className="grid grid-cols-6  gap-1 grid-flow-row-dense"

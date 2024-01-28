@@ -10,13 +10,57 @@ const TripBuilder = () => {
   const [slidestate, setSlideState] = useState(0);
   let [progess, setProgress] = useState(0);
 
+  const [tripdata, setTripdata] = useState({
+    tripname: "",
+    stratdate: "",
+    enddate: "",
+    places: [],
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setTripdata({
+      ...tripdata,
+      [e.target.name]: value,
+    });
+  };
+  const updateTripData = (data) => {
+    console.log(data.progress);
+    switch (data.progress) {
+      case 1:
+        setTripdata((prevData) => ({
+          ...prevData,
+          tripname: data.data,
+        }));
+        break;
+      case 2:
+        setTripdata((prevData) => ({
+          ...prevData,
+          stratdate: data.data["startdate"],
+        }));
+        setTripdata((prevData) => ({
+          ...prevData,
+          enddate: data.data["enddate"],
+        }));
+        break;
+      case 3:
+        setTripdata((prevData) => ({
+          ...prevData,
+          places: data.data,
+        }));
+        break;
+    }
+
+    calProgress(data.progress);
+    console.log(tripdata);
+  };
   const calProgress = (state) => {
     let progress = (state / 3) * 100;
     setSlideState(state);
     setProgress(progress);
   };
   const tripCallback = (progress) => {
-    calProgress(progress);
+    updateTripData(progress);
   };
 
   const BottonProgressBar = () => {

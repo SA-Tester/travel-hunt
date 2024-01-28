@@ -2,7 +2,9 @@ import NavBar from "../NavBar/Navbar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Card } from "flowbite-react";
+import { Card, Carousel, TextInput } from "flowbite-react";
+import FooterCon from "../Footer/FooterCon";
+import { Link } from "react-router-dom/dist/umd/react-router-dom.development";
 
 const City = () => {
   const [data, setData] = useState([]);
@@ -10,7 +12,6 @@ const City = () => {
   const navigate = useNavigate();
 
   // Get query string parameter from the URL
-  //console.log(location.search);
   const cityID = new URLSearchParams(location.search).get("c");
 
   useEffect(() => {
@@ -24,122 +25,196 @@ const City = () => {
       });
   }, []);
 
-  return (
-    <div>
-      <NavBar></NavBar>
-      <div className="flex py-28 px-10 md:flex-wrap sm:flex-wrap md:py-32">
-        <div className="flex-auto mr-6 md:w-8/12 sm:w-full">
-          <div>
-            <h1 className="text-5xl font-extrabold">
-              <span>Explore </span>
-              <span className="text-emerald-500">{data["city_name"]}</span>
-            </h1>
-          </div>
-
-          <div className="container grid grid-cols-2 my-5 gap-1">
-            <div>
+  if (cityID !== undefined) {
+    return (
+      <div>
+        <NavBar />
+        <div className="bg-red-100 relative h-screen md:h-[80vh] lg:h-[80vh]">
+          <div className="h-screen md:h-full lg:h-full">
+            <Carousel
+              indicators={false}
+              slideInterval={5000}
+              className="rounded-none"
+            >
               <img
                 src={data["image1"]}
-                className="object-cover w-full h-full"
                 alt="..."
+                className="object-cover h-screen "
               />
-            </div>
-            <div>
               <img
                 src={data["image2"]}
-                className="object-cover w-full h-full"
                 alt="..."
+                className="object-cover h-screen"
               />
-            </div>
-            <div>
               <img
                 src={data["image3"]}
-                className="object-cover w-full h-full"
                 alt="..."
+                className="object-cover h-screen"
               />
+            </Carousel>
+          </div>
+
+          <div className="container">
+            <Card className="w-11/12 md:max-w-2xl lg:max-w-2xl absolute bottom-12 m-auto left-0 right-0 bg-gray-100 dark:bg-slate-800 border-0">
+              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                Navigate Your Next Adventure: Discover, Plan, Explore with Ease!
+              </h5>
+
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                <div>
+                  <h1 className="text-5xl font-extrabold">
+                    <span>Explore </span>
+                    <span className="text-emerald-500">
+                      {data["city_name"]}
+                    </span>
+                  </h1>
+                </div>
+              </p>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-2">
+            <a
+              href="#"
+              class="mt-4 ml-2 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+            >
+              <div class="flex flex-col justify-between p-4 leading-normal">
+                <div className="flex align-items-center">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: data["country_flag"] }}
+                    className="p-3"
+                  />
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Country Information
+                  </h5>
+                </div>
+                <div className="container grid grid-flow-row grid-row-3 grid-col-2">
+                  <div className="grid grid-cols-2 container">
+                    <h2 className="py-3 mx-3 font-bold text-sm">Name</h2>
+                    <h6 className="py-3 text-sm">{data["country_name"]}</h6>
+                  </div>
+                  <div className="grid grid-cols-2 container">
+                    <h2 className="py-3 mx-3 font-bold text-sm ">Code</h2>
+                    <h6 className="py-3 text-sm">{data["country_code"]}</h6>
+                  </div>
+                  <div className="grid grid-cols-2 container">
+                    <h2 className="py-3 mx-3 font-bold text-sm ">
+                      Description
+                    </h2>
+                    <h6 className="py-3 text-sm">
+                      {data["country_description"]}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <div>
+              <h1 className="text-2xl font-bold py-3 pt-5">
+                <span>About </span>
+                <span>{data["city_name"]}</span>
+              </h1>
+              <span>{data["city_description"]}</span>
             </div>
           </div>
 
-          <div className="grid container border-solid border-gray-950 border-2 w-6/12 md:8/12 sm:w-full">
-            <h2 className="font-bold text-xl py-3 text-center">
-              Country Information
-            </h2>
+          <div className="flex py-2 px-2 md:flex-wrap sm:flex-wrap md:py-32">
+            <div className="flex-auto mr-6 md:w-8/12 sm:w-full">
+              <div>
+                <h1 className="text-2xl font-bold pt-5 pb-4">
+                  <span>Things to do in </span>
+                  <span>{data["city_name"]}</span>
+                </h1>
+                <div className="container grid grid-cols-3">
+                  {data?.places?.map((element, i) => {
+                    return (
+                      <div class="relative max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="h-[30vh]">
+                          <Link
+                            to="/allplaces"
+                            state={{ data:element }}
+                            className="flex-shrink-0"
+                          >
+                            <img
+                              className="object-cover w-full h-full rounded-t-lg"
+                              src={element.image}
+                              alt=""
+                            />
+                          </Link>
+                        </div>
+                        <div class="flex flex-col flex-grow p-5">
+                          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            {element.location_name}
+                          </h5>
 
-            <div className="container grid justify-center">
-              <div dangerouslySetInnerHTML={{ __html: data["country_flag"] }} />
-            </div>
+                          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                            {element.location_desc.slice(0, 120) + "... "}
+                          </p>
 
-            <div className="grid self-center">
-              <div className="container grid">
-                <div className="grid grid-cols-2 container">
-                  <h2 className="py-3 mx-3 font-bold text-sm text-center">
-                    Name
-                  </h2>
-                  <h6 className="py-3 text-sm">{data["country_name"]}</h6>
+                          <a
+                            href="#"
+                            class="absolute bottom-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          >
+                            Read more
+                            <svg
+                              class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 14 10"
+                            >
+                              <path
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M1 5h12m0 0L9 1m4 4L9 9"
+                              />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+
+                      // <Card
+                      //   key={i}
+                      //   className="max-w-sm max-h-[20vh]"
+                      //   imgAlt="An image is a point of interest"
+                      //   imgSrc={element.image}
+                      // >
+                      //   <a
+                      //     href=""
+                      //     className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white underline"
+                      //   >
+                      //     {element.location_name}
+                      //   </a>
+                      //   <p className="font-normal text-gray-700 dark:text-gray-400">
+                      //     {element.location_desc.slice(0, 120) + "... "}
+                      //     <br></br>
+                      //     <a href="" className="underline text-cyan-800">
+                      //       Read more
+                      //     </a>
+                      //   </p>
+                      // </Card>
+                    );
+                  })}
                 </div>
-                <div className="grid grid-cols-2 container">
-                  <h2 className="py-3 mx-3 font-bold text-sm text-center">
-                    Code
-                  </h2>
-                  <h6 className="py-3 text-sm">{data["country_code"]}</h6>
-                </div>
-                <div className="grid grid-cols-2 container">
-                  <h2 className="py-3 mx-3 font-bold text-sm text-center">
-                    Description
-                  </h2>
-                  <h6 className="py-3 text-sm">
-                    {data["country_description"]}
-                  </h6>
-                </div>
+              </div>
+
+              <div>
+                <h1 className="text-2xl font-bold pt-5">
+                  <span>Places to stay in </span>
+                  <span>{data["city_name"]}</span>
+                </h1>
               </div>
             </div>
           </div>
-
-          <div>
-            <h1 className="text-3xl font-extrabold py-3 pt-5">
-              <span>About </span>
-              <span>{data["city_name"]}</span>
-            </h1>
-
-            <span>{data["city_description"]}</span>
-          </div>
-
-          <div>
-            <h1 className="text-3xl font-extrabold pt-5 pb-4">
-              <span>Things to do in </span>
-              <span>{data["city_name"]}</span>
-            </h1>
-            <div>
-              {data?.places?.map((element, i) => {
-                return (
-                  <Card
-                    key={i}
-                    className="max-w-sm"
-                    imgAlt="An image is a point of interest"
-                    imgSrc={element.image}
-                  >
-                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      {element.location_name}
-                    </h5>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">
-                      {element.location_desc}
-                    </p>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <h1 className="text-3xl font-extrabold pt-5">
-              <span>Places to stay in </span>
-              <span>{data["city_name"]}</span>
-            </h1>
-          </div>
         </div>
+        {/* <FooterCon/> */}
       </div>
-    </div>
-  );
+    );
+  } else {
+    navigate("/", { replace: true });
+  }
 };
 
 export default City;

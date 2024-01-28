@@ -1,14 +1,18 @@
 from rest_framework import serializers
-from .models import User
 from .models import Country
 from .models import City
+from .models import Location
+from .models import Hotel
+from .models import User
+from .models import Traveller
+from .models import HotelOwner
 
 
 # The Serializer user for Signup functionality
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'firstname', 'lastname', 'email', 'password']
+        fields = ['id', 'email', 'password', 'role']
         extra_kwargs = {
             'password': {
                 'write_only': True
@@ -34,6 +38,18 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 
+class TravellerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Traveller
+        fields = '__all__'
+
+
+class HotelOwnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HotelOwner
+        fields = '__all__'
+
+
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Country
@@ -43,4 +59,16 @@ class CountrySerializer(serializers.ModelSerializer):
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
+        fields = '__all__'
+
+
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = '__all__'
+
+
+class HotelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hotel
         fields = '__all__'

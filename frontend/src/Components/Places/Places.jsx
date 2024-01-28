@@ -1,7 +1,22 @@
 import { Button } from "flowbite-react";
 import PlacesCard from "./PlacesCard";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Places = (props) => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/popular_city/")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="container mx-auto my-5 md:px-2 lg:px-24 sm:px-2">
       <div className="container md:px-2 lg:px-24 sm:px-2">
@@ -57,52 +72,25 @@ const Places = (props) => {
               <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-800"></div>
               <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700"></div>
               <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
-              <a href="allplaces" class="z-10">See more</a>
+              <a href="allplaces" class="z-10">
+                See more
+              </a>
             </button>
           </div>
         </div>
       </div>
       <div className="container mt-4">
-        <div class="grid grid-cols-2 grid-rows-4 md:grid-cols-4 gap-4">
-          <div className="md:row-span-2">
-            <PlacesCard />
+        {data.cities ? (
+          <div class="grid grid-cols-2 grid-rows-4 md:grid-cols-4 gap-4">
+            {data.cities.map((data, i) => (
+              <div key={i}>
+                <PlacesCard data={data} />
+              </div>
+            ))}
           </div>
-          <div className="md:row-span-3">
-            <PlacesCard />
-          </div>
-          <div>
-            <PlacesCard />
-          </div>
-          <div>
-            <PlacesCard />
-          </div>
-
-          <div>
-            <PlacesCard />
-          </div>
-          <div>
-            <PlacesCard />
-          </div>
-          <div>
-            <PlacesCard />
-          </div>
-          <div className="md:row-span-2">
-            <PlacesCard />
-          </div>
-
-          <div>
-            <PlacesCard />
-          </div>
-          <div>
-            <PlacesCard />
-          </div>
-          <div>
-            <PlacesCard />
-          </div>
-          <div>
-            <PlacesCard />
-          </div>
-        </div>
+        ) : (
+          <>data not found</>
+        )}
         <div className="block md:hidden mt-3 flex justify-center">
           <button className="relative group cursor-pointer text-sky-50  overflow-hidden h-8 w-24 rounded-2xl bg-sky-800 p-2 flex justify-center items-center font-light">
             <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900"></div>
