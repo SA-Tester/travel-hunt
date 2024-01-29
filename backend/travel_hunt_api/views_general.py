@@ -66,6 +66,32 @@ def get_city(request, city_id):
 
 
 @api_view(['GET'])
+def get_hotel(request, hotel_id):
+    hotel = Hotel.objects.select_related('hotel').filter(id=hotel_id)
+    
+    return Response(
+        {
+            "city_id": city.id,
+            "city_name": city.name,
+            "latitude": city.latitude,
+            "longitude": city.longitude,
+            "city_description": city.description,
+            "image1": city.image1,
+            "image2": city.image2,
+            "image3": city.image3,
+            "country_id": city.country.id,
+            "country_name": city.country.name,
+            "country_code": city.country.code,
+            "country_description": city.country.description,
+            "country_flag": city.country.flag,
+            "places": places
+        }
+    )
+
+    return Response({"msg": "No Data Available"}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
 def get_location(request, location_id):
     locationWithCity = Location.objects.select_related('city').filter(id=location_id)
     
