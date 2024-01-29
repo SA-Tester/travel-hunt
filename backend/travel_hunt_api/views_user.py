@@ -2,11 +2,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import User
+from .models import Trip
 from .serializers import UserSerializer
 from .serializers import TravellerSerializer
 from .serializers import TripSerializer
 import copy
 import json
+import ast
 
 
 @api_view(['POST'])
@@ -90,14 +92,10 @@ def validate_signup(request):
 @api_view(["POST"])
 def save_trip(request):
     data = json.loads(request.body)
-    print(request.user)
-
     users = User.objects.filter(email=request.user).values('id')
 
     try:
         for user in users:
-            print(user['id'])
-
             user_id = user["id"]
             name = data["tripname"]
             start = data["stratdate"]
@@ -113,12 +111,53 @@ def save_trip(request):
                 'is_complete': is_complete,
                 'locations': locations
             }
-            print(finalData)
             tripSerializer = TripSerializer(data=finalData)
             tripSerializer.is_valid(raise_exception=True)
             tripSerializer.save()
 
             return Response({"error": "OK", "last_location": data["last_location"]})
-        
+
     except Exception as e:
         return Response({"error": "FAILED"})
+
+
+@api_view(['POST'])
+def get_previous_trips(request):
+    # print(request.user)
+    users = User.objects.filter(email=request.user).values('id')
+    trips = []
+
+    for user in users:
+        print(user["id"])
+        previousTrips = Trip.objects.filter(
+            user_id=user["id"]).values('id', 'name')
+        for trip in previousTrips:
+            trips.append(trip)
+        # print(user["id"], trips)
+
+        if(len(trips) > 0):
+            return Response(trips)
+
+        return Response({"error": "Not Found"})
+    return Response({"error": "Unauthorized"})
+
+
+@api_view(["POST"])
+def save_to_trip(request):
+    try:
+        trips = Trip.objects.filter(id = request.POST.get("trip_name")).all()
+
+        for trip in trips:
+            print(trip.name)
+            arr = ast.literal_eval(trip.locations)
+            arr.append(request.POST.get("location"))
+            trip.locations = arr
+
+            trip.save()
+            return Response({"msg": "ok"})
+
+        return Response({"msg": "error"})
+
+    except Exception as e:
+        print(e)
+        return Response({"msg": "error"})

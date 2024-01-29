@@ -29,4 +29,10 @@ urlpatterns = [
 
     path('save_trip', views_user.save_trip, name="save_trip"),
  
+
+    path('get_previous_trips', views_user.get_previous_trips,
+         name="get_previous_trips"),
+
+    path('save_to_trip', views_user.save_to_trip,
+         name="save_to_trip")
 ]

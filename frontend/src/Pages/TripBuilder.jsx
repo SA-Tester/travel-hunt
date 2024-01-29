@@ -21,6 +21,7 @@ const TripBuilder = () => {
     stratdate: "",
     enddate: "",
     last_location: locationID,
+    last_location: locationID,
   });
 
   // const handleChange = (e) => {
@@ -59,7 +60,7 @@ const TripBuilder = () => {
     }
 
     calProgress(data.progress);
-    console.log(tripdata);
+    // console.log(tripdata);
 
     if (
       tripdata["tripname"] !== "" &&
@@ -73,8 +74,7 @@ const TripBuilder = () => {
             const locationID = response.data["last_location"];
 
             toast.success("Trip Saved Successfully");
-            // navigate("/location?l=" + locationID, {replace:true});
-            navigate("/location", { replace: true });
+            navigate("/location?l=" + locationID, { replace: true });
           }
         })
         .catch((error) => {
