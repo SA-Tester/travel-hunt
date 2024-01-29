@@ -1,0 +1,6 @@
+
+@@ -0,0 +1,4 @@
+__pycache__
+./migrations
+*.pyc
+*.py
