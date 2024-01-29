@@ -6,6 +6,7 @@ from .models import Hotel
 from .models import User
 from .models import Traveller
 from .models import HotelOwner
+from .models import Trip
 
 
 # The Serializer user for Signup functionality
@@ -72,3 +73,8 @@ class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hotel
         fields = '__all__'
+
+class TripSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Trip
+        fields = "__all__"
