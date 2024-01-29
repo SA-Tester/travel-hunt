@@ -51,7 +51,7 @@ function NavBar() {
             Home
           </Navbar.Link>
           <Navbar.Link href="/planner" className="text-blue-900">
-            TripPlanner
+            Trip Planner
           </Navbar.Link>
           <Navbar.Link href="#" className="text-blue-900">
             Services

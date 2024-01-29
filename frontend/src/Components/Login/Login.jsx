@@ -29,15 +29,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        if (error?.response?.status === 401) {
-          toast.error(
-            error?.response?.status + "Unauthorized. Check your credentials"
-          );
-        } else if (error?.response?.status === 400) {
-          toast.error(error?.response?.status + "User not found");
-        } else {
-          toast.error("Sorry an error occured.");
-        }
+        toast.error(error);
       });
   };
 
