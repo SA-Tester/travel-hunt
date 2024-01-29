@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import User
 from .models import Trip
+from .models import Traveller
+from .models import Hotel
 from .serializers import UserSerializer
 from .serializers import TravellerSerializer
 from .serializers import TripSerializer
@@ -145,7 +147,7 @@ def get_previous_trips(request):
 @api_view(["POST"])
 def save_to_trip(request):
     try:
-        trips = Trip.objects.filter(id = request.POST.get("trip_name")).all()
+        trips = Trip.objects.filter(id=request.POST.get("trip_name")).all()
 
         for trip in trips:
             print(trip.name)
@@ -161,3 +163,27 @@ def save_to_trip(request):
     except Exception as e:
         print(e)
         return Response({"msg": "error"})
+
+
+@api_view(["POST"])
+def get_user_detials(request):
+    ### COMMENT THIS LINE AND UMCOMMENT THE ONE AFTER
+    email = "test@gmail.com"
+    # email = request.user;
+    user = User.objects.filter(email=email).values('id', 'email')
+    #print(user[0]["id"])
+
+    travellers = Traveller.objects.filter(user_id=user[0]["id"])
+    for traveller in travellers:
+        data = {
+            'email': user[0]['email'],
+            'user_id': traveller.user.id,
+            'firstname': traveller.firstname,
+            'lastname': traveller.lastname,
+            'mobile': traveller.mobile
+        }
+        #print(data)
+
+        return Response({'data': data})
+
+    return Response({'error': "Not Found"})

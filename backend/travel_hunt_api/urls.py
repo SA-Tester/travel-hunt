@@ -34,5 +34,11 @@ urlpatterns = [
          name="get_previous_trips"),
 
     path('save_to_trip', views_user.save_to_trip,
-         name="save_to_trip")
+         name="save_to_trip"),
+
+    path('get_user_detials', views_user.get_user_detials,
+         name="get_user_detials"),
+
+     path('get_hotels', views_general.get_hotels,
+         name="get_hotels")
 ]

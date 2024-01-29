@@ -8,9 +8,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .functions import placesInCity
 from .models import City
 from .models import Location
-from .models import Trip
+from .models import Hotel
 from django.core.serializers import serialize
-
 
 
 @api_view(['GET'])
@@ -68,7 +67,7 @@ def get_city(request, city_id):
 @api_view(['GET'])
 def get_hotel(request, hotel_id):
     hotel = Hotel.objects.select_related('hotel').filter(id=hotel_id)
-    
+
     return Response(
         {
             "city_id": city.id,
@@ -93,13 +92,14 @@ def get_hotel(request, hotel_id):
 
 @api_view(['GET'])
 def get_location(request, location_id):
-    locationWithCity = Location.objects.select_related('city').filter(id=location_id)
-    
+    locationWithCity = Location.objects.select_related(
+        'city').filter(id=location_id)
 
     if(len(locationWithCity) > 0):
         location = locationWithCity[0]
 
-        cityWithCountry = City.objects.select_related('country').filter(id=location.city.id)
+        cityWithCountry = City.objects.select_related(
+            'country').filter(id=location.city.id)
 
         if(len(cityWithCountry) > 0):
             return Response(
@@ -123,7 +123,6 @@ def get_location(request, location_id):
     )
 
 
-
 @api_view(['GET'])
 def get_popular_city(request):
     # Randomly order the cities and select the first 10
@@ -145,6 +144,33 @@ def get_popular_city(request):
 
     else:
         return Response({"msg": "An error occurred"})
+
+
+@api_view(["POST"])
+def get_hotels(request):
+    hotels = Hotel.objects.all()
+    # print(user[0]["id"])
+
+    for hotel in hotels:
+        data = {
+            'id': hotel.id,
+            'name': hotel.name,
+            'description': hotel.description,
+            'parking': hotel.parking,
+            'pool': hotel.pool,
+            'restaurant': hotel.restaurant,
+            'pub': hotel.pub,
+            'transport': hotel.transport,
+            'image1': hotel.image1,
+            'image2': hotel.image2,
+            'image3': hotel.image3,
+            'city_id': hotel.city
+        }
+        # print(data)
+
+        return Response({'data': data})
+
+    return Response({'error': "Not Found"})
 
 
 class LoginView(APIView):
