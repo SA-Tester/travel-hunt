@@ -15,6 +15,7 @@ import axios from "axios";
 
 function NavBar() {
   const [loggedIn, setLoginStatus] = useState("");
+  const [userdata, setUserData] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,9 +23,13 @@ function NavBar() {
     if (localStorage.getItem("access_token") !== null) {
       (async () => {
         try {
-          await axios.get("http://localhost:8000/api/login", {
-            headers: { "Content-Type": "application/json" },
-          });
+          await axios
+            .get("http://localhost:8000/api/login", {
+              headers: { "Content-Type": "application/json" },
+            })
+            .then((res) => {
+              setUserData(res.data);
+            });
           setLoginStatus(true);
         } catch {
           console.log("Unauthorized");
@@ -92,17 +97,21 @@ function NavBar() {
               }
             >
               <Dropdown.Header>
-                <span className="block text-sm">Bonnie Green</span>
+                <span className="block text-sm">{userdata["name"]}</span>
                 <span className="block truncate text-sm font-medium">
-                  name@flowbite.com
+                  {userdata["email"]}
                 </span>
               </Dropdown.Header>
-              <Dropdown.Item>Dashboard</Dropdown.Item>
+              <Dropdown.Item>
+                <a href="/profile">Profile</a>
+              </Dropdown.Item>
               <Dropdown.Item>Settings</Dropdown.Item>
               <Dropdown.Item>Earnings</Dropdown.Item>
 
               <Dropdown.Divider />
-              <Dropdown.Item>Sign out</Dropdown.Item>
+              <Dropdown.Item className="text-white bg-red-400">
+                Sign out
+              </Dropdown.Item>
             </Dropdown>
           ) : (
             <div className="flex flex-wrap gap-2 border-s-2 px-3 border-blue-300">

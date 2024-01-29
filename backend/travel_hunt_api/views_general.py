@@ -8,6 +8,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .functions import placesInCity
 from .models import City
 from .models import Location
+from django.core.serializers import serialize
+
 
 
 @api_view(['GET'])
@@ -123,7 +125,7 @@ class LoginView(APIView):
 
     def get(self, request):
         # print(request.user)
-        content = {"message": "Login Successful"}
+        content = {"email": request.user.email,"name":request.user.last_name}
 
         return Response(content)
 
