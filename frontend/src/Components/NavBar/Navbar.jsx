@@ -6,13 +6,35 @@ import {
   Flowbite,
   Navbar,
 } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../../logo.png";
 import "../NavBar/nav.css";
+import { useLocation } from "react-router-dom/dist/umd/react-router-dom.development";
+import axios from "axios";
 
 function NavBar() {
+  const [loggedIn, setLoginStatus] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (localStorage.getItem("access_token") !== null) {
+      (async () => {
+        try {
+          await axios.get("http://localhost:8000/api/login", {
+            headers: { "Content-Type": "application/json" },
+          });
+          setLoginStatus(true);
+        } catch {
+          console.log("Unauthorized");
+          setLoginStatus(false);
+        }
+      })();
+    } else {
+      setLoginStatus(false);
+    }
+  }, []);
 
   const navigateToLogin = () => {
     navigate("/login");
@@ -22,7 +44,7 @@ function NavBar() {
     navigate("/signup");
   };
 
-  const [authstate, setAuthState] = useState(false);
+  // const [authstate, setAuthState] = useState(true);
 
   const CustomFlowbiteTheme = {
     nav: {
@@ -50,7 +72,14 @@ function NavBar() {
           <Navbar.Link href="/" active className="text-blue-900">
             Home
           </Navbar.Link>
-          {authstate ? (
+          {loggedIn ? (
+            <Navbar.Link href="/planner" active className="text-blue-900">
+              TripPlanner
+            </Navbar.Link>
+          ) : (
+            ""
+          )}
+          {loggedIn ? (
             <Dropdown
               arrowIcon={false}
               inline
