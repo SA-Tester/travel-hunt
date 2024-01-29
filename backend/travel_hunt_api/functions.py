@@ -1,4 +1,5 @@
 from .models import Location
+from .models import Hotel
 
 
 def placesInCity(city_id):
@@ -20,5 +21,24 @@ def placesInCity(city_id):
 
 
 def hotelsInCity(city_id):
-    
-    return
+    data = []
+    hotels = Hotel.objects.select_related('city').filter(city_id=city_id)
+
+    for hotel in hotels:
+        element = {
+            'hotel_id': hotel.id,
+            'hotel_name': hotel.name,
+            'hotel_desc': hotel.description,
+            'image1': hotel.image1,
+            'image2': hotel.image2,
+            'image3': hotel.image3,
+            'wifi': hotel.wifi,
+            'parking': hotel.parking,
+            'pool': hotel.pool,
+            'restaurant': hotel.restaurant,
+            'pub': hotel.pub
+        }
+
+        data.append(element)
+
+    return data
