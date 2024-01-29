@@ -3,9 +3,8 @@ import { useState } from "react";
 
 const PlacesCard = (data) => {
   const [favState, setFavState] = useState(true);
-  console.log(data);
+
   const changeFavState = () => {
-    console.log(favState);
     setFavState(!favState);
   };
   return (

@@ -2,9 +2,8 @@ import NavBar from "../NavBar/Navbar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Card, Carousel, TextInput } from "flowbite-react";
-import FooterCon from "../Footer/FooterCon";
-import { Link } from "react-router-dom/dist/umd/react-router-dom.development";
+import { Card, Carousel } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 const City = () => {
   const [data, setData] = useState([]);
@@ -25,7 +24,7 @@ const City = () => {
       });
   }, []);
 
-  if (cityID !== undefined) {
+  if (data !== undefined) {
     return (
       <div>
         <NavBar />
@@ -55,11 +54,7 @@ const City = () => {
           </div>
 
           <div className="container">
-            <Card className="w-11/12 md:max-w-2xl lg:max-w-2xl absolute bottom-12 m-auto left-0 right-0 bg-gray-100 dark:bg-slate-800 border-0">
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Navigate Your Next Adventure: Discover, Plan, Explore with Ease!
-              </h5>
-
+            <Card className="w-fit md:max-w-2xl lg:max-w-2xl absolute bottom-12 m-auto left-0 right-0 bg-gray-100 dark:bg-slate-800 border-0">
               <p className="font-normal text-gray-700 dark:text-gray-400">
                 <div>
                   <h1 className="text-5xl font-extrabold">
@@ -131,8 +126,8 @@ const City = () => {
                       <div class="relative max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <div class="h-[30vh]">
                           <Link
-                            to="/allplaces"
-                            state={{ data:element }}
+                            to={"/location?l=" + element.location_id}
+                            state={{ data: element }}
                             className="flex-shrink-0"
                           >
                             <img
@@ -147,12 +142,16 @@ const City = () => {
                             {element.location_name}
                           </h5>
 
+                          <h5 class="mb-2 text-medium font-bold tracking-tight text-gray-900 dark:text-white">
+                            {element.location_category}
+                          </h5>
+
                           <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                             {element.location_desc.slice(0, 120) + "... "}
                           </p>
 
                           <a
-                            href="#"
+                            href={"/location?l=" + element.location_id}
                             class="absolute bottom-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                           >
                             Read more
@@ -174,27 +173,6 @@ const City = () => {
                           </a>
                         </div>
                       </div>
-
-                      // <Card
-                      //   key={i}
-                      //   className="max-w-sm max-h-[20vh]"
-                      //   imgAlt="An image is a point of interest"
-                      //   imgSrc={element.image}
-                      // >
-                      //   <a
-                      //     href=""
-                      //     className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white underline"
-                      //   >
-                      //     {element.location_name}
-                      //   </a>
-                      //   <p className="font-normal text-gray-700 dark:text-gray-400">
-                      //     {element.location_desc.slice(0, 120) + "... "}
-                      //     <br></br>
-                      //     <a href="" className="underline text-cyan-800">
-                      //       Read more
-                      //     </a>
-                      //   </p>
-                      // </Card>
                     );
                   })}
                 </div>
@@ -209,7 +187,6 @@ const City = () => {
             </div>
           </div>
         </div>
-        {/* <FooterCon/> */}
       </div>
     );
   } else {
