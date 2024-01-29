@@ -27,5 +27,6 @@ urlpatterns = [
     path('validate_admin_signup',
          views_admin.validate_signup, name='validate_admin_signup'),
 
-    path('save_trip', views_user.save_trip, name="save_trip")
+    path('save_trip', views_user.save_trip, name="save_trip"),
+ 
 ]

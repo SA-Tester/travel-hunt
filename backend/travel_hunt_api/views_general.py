@@ -8,6 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .functions import placesInCity
 from .models import City
 from .models import Location
+from .models import Trip
 from django.core.serializers import serialize
 
 
@@ -94,6 +95,7 @@ def get_location(request, location_id):
     return Response(
         {'error': 'No Data Available'}
     )
+
 
 
 @api_view(['GET'])
