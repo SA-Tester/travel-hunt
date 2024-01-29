@@ -148,29 +148,8 @@ def get_popular_city(request):
 
 @api_view(["POST"])
 def get_hotels(request):
-    hotels = Hotel.objects.all()
-    # print(user[0]["id"])
-
-    for hotel in hotels:
-        data = {
-            'id': hotel.id,
-            'name': hotel.name,
-            'description': hotel.description,
-            'parking': hotel.parking,
-            'pool': hotel.pool,
-            'restaurant': hotel.restaurant,
-            'pub': hotel.pub,
-            'transport': hotel.transport,
-            'image1': hotel.image1,
-            'image2': hotel.image2,
-            'image3': hotel.image3,
-            'city_id': hotel.city
-        }
-        # print(data)
-
-        return Response({'data': data})
-
-    return Response({'error': "Not Found"})
+    hotels = Hotel.objects.all().values()
+    return Response({'data': hotels})
 
 
 class LoginView(APIView):
