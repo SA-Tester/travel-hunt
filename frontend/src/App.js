@@ -5,7 +5,6 @@ import Home from "./Components/HomePage/Home";
 import TripBuilder from "./Pages/TripBuilder";
 import TravllerHome from "./Components/HomePage/TravellerHome";
 import BusinessHome from "./Components/HomePage/BusinessHome";
-
 import Login from "./Components/Login/Login";
 import AdminLogin from "./Components/Login/AdminLogin";
 import UserSignup from "./Components/Signup/UserSignup";
@@ -16,6 +15,10 @@ import City from "./Components/SearchResults/City";
 import AdminHome from "./Pages/Admin/AdminHome/AdminHome";
 import Profile from "./Components/Profile/Profile";
 import HotelDetails from "./Components/Places/HotelDetails";
+import Location from "./Components/SearchResults/Location";
+//import Hotel from "./Components/SearchResults/Hotel";
+import Profile from "./Components/Profile/Profile";
+import Tripinfo from "./Components/Profile/Tripinfo";
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/city" element={<City />} />
+          <Route path="/location" element={<Location />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/logout" element={<Logout />} />
@@ -33,9 +37,14 @@ function App() {
           <Route path="/business_home" element={<BusinessHome />} />
           <Route path="/planner" element={<TripBuilder />} />
           <Route path="/allplaces" element={<AllPlaces />} />
+<<<<<<< Updated upstream
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/hotel" element={<HotelDetails />} />
+=======
+          <Route path="/tripinfo" element={<Tripinfo />} />
+          <Route path="/profile" element={<Profile />} />
+>>>>>>> Stashed changes
         </Routes>
       </Layout>
     </BrowserRouter>
