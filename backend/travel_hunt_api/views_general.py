@@ -123,8 +123,7 @@ class LoginView(APIView):
 
     def get(self, request):
         # print(request.user)
-        content = {"message": "Login Successful"}
-
+        content = {"message": "success"}
         return Response(content)
 
 

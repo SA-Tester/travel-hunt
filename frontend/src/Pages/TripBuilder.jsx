@@ -15,12 +15,12 @@ const TripBuilder = () => {
   let [progess, setProgress] = useState(0);
 
   const locationID = new URLSearchParams(location.search).get("l");
-  
+
   const [tripdata, setTripdata] = useState({
     tripname: "",
     stratdate: "",
     enddate: "",
-    last_location: locationID
+    last_location: locationID,
   });
 
   // const handleChange = (e) => {
@@ -59,7 +59,7 @@ const TripBuilder = () => {
     }
 
     calProgress(data.progress);
-    console.log(tripdata);
+    // console.log(tripdata);
 
     if (
       tripdata["tripname"] !== "" &&
@@ -69,11 +69,11 @@ const TripBuilder = () => {
       await axios
         .post("http://localhost:8000/api/save_trip", tripdata)
         .then((response) => {
-          if(response.data["error"] === "OK"){
+          if (response.data["error"] === "OK") {
             const locationID = response.data["last_location"];
 
             toast.success("Trip Saved Successfully");
-            navigate("/location?l=" + locationID, {replace:true});
+            navigate("/location?l=" + locationID, { replace: true });
           }
         })
         .catch((error) => {
