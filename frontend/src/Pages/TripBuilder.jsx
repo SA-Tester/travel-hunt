@@ -1,10 +1,10 @@
 import { Progress } from "flowbite-react";
-import NavBar from "../Components/NavBar/Navbar";
 import { useState } from "react";
+import NavBar from "../Components/NavBar/Navbar";
 import TripNameForm from "../Components/TripPlaner/TripNameForm";
-
 import DatePickerComponent from "../Components/TripPlaner/DatePickerComponent";
 import PlaceSelectForm from "../Components/TripPlaner/PlacesSelectForm";
+import axios from "axios";
 
 const TripBuilder = () => {
   const [slidestate, setSlideState] = useState(0);
@@ -14,18 +14,18 @@ const TripBuilder = () => {
     tripname: "",
     stratdate: "",
     enddate: "",
-    places: [],
   });
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setTripdata({
-      ...tripdata,
-      [e.target.name]: value,
-    });
-  };
-  const updateTripData = (data) => {
-    console.log(data.progress);
+  // const handleChange = (e) => {
+  //   const value = e.target.value;
+  //   setTripdata({
+  //     ...tripdata,
+  //     [e.target.name]: value,
+  //   });
+  // };
+
+  const updateTripData = async (data) => {
+    //console.log(data.progress);
     switch (data.progress) {
       case 1:
         setTripdata((prevData) => ({
@@ -53,7 +53,19 @@ const TripBuilder = () => {
 
     calProgress(data.progress);
     console.log(tripdata);
+
+    if(tripdata["tripname"] !== "" && tripdata["startdate"] !== "" && tripdata["enddate"] !== ""){
+      await axios.
+      post("http://localhost:8000/api/save_trip", tripdata).
+      then((response) => {
+
+      }).
+      catch((error) => {
+
+      });
+    }
   };
+
   const calProgress = (state) => {
     let progress = (state / 3) * 100;
     setSlideState(state);
@@ -89,7 +101,7 @@ const TripBuilder = () => {
             }}
             data-tooltip-target="tooltip-microphone"
             type="button"
-            class="p-2.5 group bg-gray-100 rounded-full hover:bg-gray-200 me-4 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800"
+            className="p-2.5 group bg-gray-100 rounded-full hover:bg-gray-200 me-4 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800"
           >
             <div className="px-2">1</div>
             <span class="sr-only">Content 1</span>
