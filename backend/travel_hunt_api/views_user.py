@@ -4,7 +4,9 @@ from rest_framework import status
 from .models import User
 from .serializers import UserSerializer
 from .serializers import TravellerSerializer
+from .serializers import TripSerializer
 import copy
+import json
 
 
 @api_view(['POST'])
@@ -83,3 +85,40 @@ def validate_signup(request):
             {"error": f"Password does not match"},
             status=status.HTTP_406_NOT_ACCEPTABLE
         )
+
+
+@api_view(["POST"])
+def save_trip(request):
+    data = json.loads(request.body)
+    print(request.user)
+
+    users = User.objects.filter(email=request.user).values('id')
+
+    try:
+        for user in users:
+            print(user['id'])
+
+            user_id = user["id"]
+            name = data["tripname"]
+            start = data["stratdate"]
+            end = data["enddate"]
+            is_complete = 0
+            locations = "[]"
+
+            finalData = {
+                'user': user_id,
+                'name': name,
+                'start': start,
+                'end': end,
+                'is_complete': is_complete,
+                'locations': locations
+            }
+            print(finalData)
+            tripSerializer = TripSerializer(data=finalData)
+            tripSerializer.is_valid(raise_exception=True)
+            tripSerializer.save()
+
+            return Response({"error": "OK"})
+        
+    except Exception as e:
+        return Response({"error": "FAILED"})
