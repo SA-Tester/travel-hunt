@@ -23,15 +23,13 @@ const PlaceSelectForm = ({ tripCallback }) => {
 
         <p className="font-normal text-gray-700 dark:text-gray-400">
           <form
-            className="grid grid-cols-6  gap-1 grid-flow-row-dense"
+            className=""
             onSubmit={(e) => handleSubmit(e)}
             //   onSubmit={(e) => handleSearch(e)}
           >
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mt-3"
-           
-              
+              className="w-100 bg-[#427d9d] text-white p-2 rounded hover:bg-blue-600 mt-3"
             >
               Save Tour
             </button>

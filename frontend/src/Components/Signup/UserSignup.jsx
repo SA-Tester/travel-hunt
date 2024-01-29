@@ -39,10 +39,10 @@ const UserSignup = () => {
     <div>
       <form onSubmit={(e) => handleSignup(e)}>
         <div
-          className="grid grid-cols-1 content-center bg-cover h-auto md:w-full"
+          className="grid grid-cols-1 content-center bg-cover h-auto md:w-full p-12"
           style={{ backgroundImage: `url(${background})` }}
         >
-          <div className="grid grid-cols-1 gap-3 container border-4 py-4 px-4 bg-zinc-100/50 md:w-5/12 sm:w-full">
+          <div className="grid grid-cols-1 gap-3 container rounded shadow-lg py-4 px-4 backdrop-blur-lg md:w-5/12 sm:w-full">
             <h1 className="text-center font-extrabold text-3xl py-3">
               Traveller - Sign Up
             </h1>
@@ -128,16 +128,16 @@ const UserSignup = () => {
               type="submit"
               name="signup"
               value="Sign up"
-              className="border-b-4 text-white bg-cyan-600 rounded-lg py-2 place-content-center"
+              className="text-white bg-cyan-600 rounded-lg py-2 place-content-center"
             />
 
             <div className="grid grid-cols-2 mt-4">
-              <a href="/login" className="font-bold underline text-blue-700">
+              <a href="/login" className="font-light text-white">
                 Alread registered?
               </a>
               <a
                 href="/admin-signup"
-                className="text-right font-bold underline text-blue-700"
+                className="text-right font-light  text-white"
               >
                 Do you own a business?
               </a>

@@ -6,13 +6,40 @@ import {
   Flowbite,
   Navbar,
 } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../../logo.png";
 import "../NavBar/nav.css";
+import { useLocation } from "react-router-dom/dist/umd/react-router-dom.development";
+import axios from "axios";
 
 function NavBar() {
+  const [loggedIn, setLoginStatus] = useState("");
+  const [userdata, setUserData] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (localStorage.getItem("access_token") !== null) {
+      (async () => {
+        try {
+          await axios
+            .get("http://localhost:8000/api/login", {
+              headers: { "Content-Type": "application/json" },
+            })
+            .then((res) => {
+              setUserData(res.data);
+            });
+          setLoginStatus(true);
+        } catch {
+          console.log("Unauthorized");
+          setLoginStatus(false);
+        }
+      })();
+    } else {
+      setLoginStatus(false);
+    }
+  }, []);
 
   const navigateToLogin = () => {
     navigate("/login");
@@ -22,7 +49,7 @@ function NavBar() {
     navigate("/signup");
   };
 
-  const [authstate, setAuthState] = useState(false);
+  // const [authstate, setAuthState] = useState(true);
 
   const CustomFlowbiteTheme = {
     nav: {
@@ -50,7 +77,14 @@ function NavBar() {
           <Navbar.Link href="/" active className="text-blue-900">
             Home
           </Navbar.Link>
-          {authstate ? (
+          {loggedIn ? (
+            <Navbar.Link href="/planner" active className="text-blue-900">
+              TripPlanner
+            </Navbar.Link>
+          ) : (
+            ""
+          )}
+          {loggedIn ? (
             <Dropdown
               arrowIcon={false}
               inline
@@ -63,17 +97,21 @@ function NavBar() {
               }
             >
               <Dropdown.Header>
-                <span className="block text-sm">Bonnie Green</span>
+                <span className="block text-sm">{userdata["name"]}</span>
                 <span className="block truncate text-sm font-medium">
-                  name@flowbite.com
+                  {userdata["email"]}
                 </span>
               </Dropdown.Header>
-              <Dropdown.Item>Dashboard</Dropdown.Item>
+              <Dropdown.Item>
+                <a href="/profile">Profile</a>
+              </Dropdown.Item>
               <Dropdown.Item>Settings</Dropdown.Item>
               <Dropdown.Item>Earnings</Dropdown.Item>
 
               <Dropdown.Divider />
-              <Dropdown.Item>Sign out</Dropdown.Item>
+              <Dropdown.Item className="text-white bg-red-400">
+                Sign out
+              </Dropdown.Item>
             </Dropdown>
           ) : (
             <div className="flex flex-wrap gap-2 border-s-2 px-3 border-blue-300">

@@ -126,8 +126,9 @@ const City = () => {
                       <div class="relative max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <div class="h-[30vh]">
                           <Link
-                            to={"/location?l=" + element.location_id}
-                            state={{ data: element }}
+                            // to={"/location?l=" + element.location_id}
+                            to={"/allplaces?l=" + element.location_id}
+                            // state={{ data: element }}
                             className="flex-shrink-0"
                           >
                             <img

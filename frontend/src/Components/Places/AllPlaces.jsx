@@ -1,10 +1,33 @@
-import { useLocation } from "react-router-dom/dist/umd/react-router-dom.development";
+import {
+  useLocation,
+  useNavigate,
+} from "react-router-dom/dist/umd/react-router-dom.development";
 import NavBar from "../NavBar/Navbar";
 import AllPlacesHero from "./AllPlacesHero";
 import FooterCon from "../Footer/FooterCon";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const AllPlaces = (props) => {
   // const { state } = props.location;
+  const [data, setData] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Get query string parameter from the URL
+  const locationID = new URLSearchParams(location.search).get("l");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/get_location/" + locationID)
+      .then((response) => {
+        setData(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const showModel = () => {
     document.getElementById("select-modal").style = "display:block";
@@ -14,7 +37,7 @@ const AllPlaces = (props) => {
   };
 
   let { state } = useLocation();
-  console.log(state.data);
+  // console.log(state.data);
   return (
     <>
       <NavBar />
@@ -28,7 +51,7 @@ const AllPlaces = (props) => {
                   style={{ height: "450px" }}
                 >
                   <img
-                    src={state.data["image"]}
+                    src={data["image1"]}
                     alt=""
                     className="object-contain w-full h-full "
                   />
@@ -40,7 +63,7 @@ const AllPlaces = (props) => {
                       className="block border border-blue-100 dark:border-gray-700 dark:hover:border-gray-600 hover:border-blue-300 "
                     >
                       <img
-                        src={state.data["image"]}
+                        src={data["image2"]}
                         alt=""
                         className="object-cover w-full lg:h-32"
                       />
@@ -52,7 +75,7 @@ const AllPlaces = (props) => {
                       className="block border border-blue-100 dark:border-transparent dark:hover:border-gray-600 hover:border-blue-300"
                     >
                       <img
-                        src={state.data["image"]}
+                        src={data["image3"]}
                         alt=""
                         className="object-cover w-full lg:h-32"
                       />
@@ -64,7 +87,7 @@ const AllPlaces = (props) => {
                       className="block border border-blue-100 dark:border-transparent dark:hover:border-gray-600 hover:border-blue-300"
                     >
                       <img
-                        src={state.data["image"]}
+                        src={data["image1"]}
                         alt=""
                         className="object-cover w-full lg:h-32"
                       />
@@ -76,7 +99,7 @@ const AllPlaces = (props) => {
                       className="block border border-blue-100 dark:border-transparent dark:hover:border-gray-600 hover:border-blue-300"
                     >
                       <img
-                        src={state.data["image"]}
+                        src={data["image1"]}
                         alt=""
                         className="object-cover w-full lg:h-32"
                       />
@@ -89,15 +112,39 @@ const AllPlaces = (props) => {
               <div className="lg:pl-20">
                 <div className="pb-6 mb-8 border-b border-gray-200 dark:border-gray-700">
                   <span className="text-lg font-medium text-blue-900 dark:text-rose-200">
-                    {state.data["location_category"]}
+                    {data["category"]}
                   </span>
                   <h2 className="max-w-xl mt-2 mb-6 text-xl font-bold dark:text-gray-300 md:text-4xl">
-                    {state.data["location_name"]}
+                    {data["name"]}
                   </h2>
 
                   <p className="max-w-md mb-8 text-gray-700 dark:text-gray-400">
-                    {state.data["location_desc"]}
+                    {data["description"]}
                   </p>
+                </div>
+                <div className="grid grid-cols-1">
+                  <div>
+                    <h1 className="text-2xl font-bold py-3">
+                      <span>Location Deatils of </span>
+                      <span className="text-emerald-500">{data["name"]}</span>
+                    </h1>
+                    <div>
+                      <div className="grid grid-cols-2 container">
+                        <h2 className="py-3 font-bold text-sm">Located In</h2>
+                        <h6 className="py-3 text-sm">
+                          {data["city_name"] + ", " + data["country_name"]}
+                        </h6>
+                      </div>
+                      <div className="grid grid-cols-2 container">
+                        <h2 className="py-3 font-bold text-sm ">Latitude</h2>
+                        <h6 className="py-3 text-sm">{data["latitude"]}</h6>
+                      </div>
+                      <div className="grid grid-cols-2 container">
+                        <h2 className="py-3 font-bold text-sm ">Longitude</h2>
+                        <h6 className="py-3 text-sm">{data["longitude"]}</h6>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="container">
                   <button
@@ -196,20 +243,22 @@ const AllPlaces = (props) => {
                   </li>
                 </ul>
                 <div className="flex flex-row gap-2">
-
-                <button class="text-white inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Save Tour
-                </button>
-                <button class="text-white inline-flex w-full justify-center bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  New Tour
-                </button>
+                  <button class="text-white inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Save Tour
+                  </button>
+                  <a
+                    href="planner"
+                    class="text-white inline-flex w-full justify-center bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    New Tour
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </center>
-      <FooterCon/>
+      <FooterCon />
     </>
   );
 };

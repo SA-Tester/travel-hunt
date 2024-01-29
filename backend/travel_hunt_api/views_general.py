@@ -8,6 +8,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .functions import placesInCity
 from .models import City
 from .models import Location
+from django.core.serializers import serialize
+
 
 
 @api_view(['GET'])
