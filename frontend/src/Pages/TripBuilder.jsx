@@ -74,7 +74,7 @@ const TripBuilder = () => {
             const locationID = response.data["last_location"];
 
             toast.success("Trip Saved Successfully");
-            navigate("/location?l=" + locationID, { replace: true });
+            navigate("/", { replace: true });
           }
         })
         .catch((error) => {

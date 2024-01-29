@@ -7,6 +7,7 @@ import AllPlacesHero from "./AllPlacesHero";
 import FooterCon from "../Footer/FooterCon";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import TripSelect from "../SearchResults/TripSelect";
 
 const AllPlaces = (props) => {
   // const { state } = props.location;
@@ -147,17 +148,7 @@ const AllPlaces = (props) => {
                   </div>
                 </div>
                 <div className="container">
-                  <button
-                    type="button"
-                    data-modal-target="popup-modal"
-                    data-modal-toggle="popup-modal"
-                    onClick={() => {
-                      showModel();
-                    }}
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    Add to Trip
-                  </button>
+                  <TripSelect />
                 </div>
               </div>
             </div>

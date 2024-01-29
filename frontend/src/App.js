@@ -40,6 +40,7 @@ function App() {
           <Route path="/hotel" element={<HotelDetails />} />
           <Route path="/tripinfo" element={<Tripinfo />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/trip_info" element={<Tripinfo />} />
         </Routes>
       </Layout>
     </BrowserRouter>

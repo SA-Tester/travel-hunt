@@ -1,8 +1,24 @@
 import { Button } from "flowbite-react";
 import PlacesCard from "./PlacesCard";
 import HotelCard from "./HotelCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Hotels = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:8000/api/get_hotels/")
+      .then((response) => {
+        console.log(response);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="container mx-auto my-5 md:px-2 lg:px-24 sm:px-2">
       <div className="container ">

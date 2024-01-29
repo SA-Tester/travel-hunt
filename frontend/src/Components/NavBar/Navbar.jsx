@@ -84,6 +84,7 @@ function NavBar() {
           ) : (
             ""
           )}
+
           {loggedIn ? (
             <Dropdown
               arrowIcon={false}
@@ -105,8 +106,6 @@ function NavBar() {
               <Dropdown.Item>
                 <a href="/profile">Profile</a>
               </Dropdown.Item>
-              <Dropdown.Item>Settings</Dropdown.Item>
-              <Dropdown.Item>Earnings</Dropdown.Item>
 
               <Dropdown.Divider />
               <Dropdown.Item className="text-white bg-red-400">

@@ -78,10 +78,7 @@ const Login = () => {
               <a href="/signup" className=" text-white">
                 Sign Up
               </a>
-              <a
-                href="/admin-login"
-                className="text-white text-right"
-              >
+              <a href="/admin-login" className="text-white text-right">
                 Log In as a Business User
               </a>
             </div>
