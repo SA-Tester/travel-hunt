@@ -17,6 +17,7 @@ import Profile from "./Components/Profile/Profile";
 import HotelDetails from "./Components/Places/HotelDetails";
 import Location from "./Components/SearchResults/Location";
 import Tripinfo from "./Components/Profile/Tripinfo";
+import Test from "./Components/Test/Test";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/hotel" element={<HotelDetails />} />
           <Route path="/tripinfo" element={<Tripinfo />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/test" element={<Test/>}/>
         </Routes>
       </Layout>
     </BrowserRouter>
