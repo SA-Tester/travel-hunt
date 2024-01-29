@@ -21,10 +21,10 @@ const HeroSection = () => {
         }
       })
       .catch((error) => {
-        if (error?.response?.status === 404) {
+        if (error.response.status === 404) {
           toast.error("City not found");
         } else {
-          toast.error("An error occurred. Code: " + error?.response?.status);
+          toast.error("An error occurred. Code: " + error.response.status);
         }
       });
     //console.log(formData.get("search"));

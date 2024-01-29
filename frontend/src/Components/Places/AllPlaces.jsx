@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom/dist/umd/react-router-dom.development";
 import NavBar from "../NavBar/Navbar";
 import AllPlacesHero from "./AllPlacesHero";
+import FooterCon from "../Footer/FooterCon";
 
 const AllPlaces = (props) => {
   // const { state } = props.location;
@@ -208,6 +209,7 @@ const AllPlaces = (props) => {
           </div>
         </div>
       </center>
+      <FooterCon/>
     </>
   );
 };

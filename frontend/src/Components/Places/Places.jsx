@@ -81,7 +81,7 @@ const Places = (props) => {
       </div>
       <div className="container mt-4">
         {data.cities ? (
-          <div class="grid grid-cols-2 grid-rows-4 md:grid-cols-4 gap-4">
+          <div class="grid grid-cols-2 grid-rows-3 md:grid-cols-4 gap-4">
             {data.cities.map((data, i) => (
               <div key={i}>
                 <PlacesCard data={data} />

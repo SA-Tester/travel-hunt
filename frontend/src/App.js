@@ -13,6 +13,9 @@ import AdminSignup from "./Components/Signup/AdminSignup";
 import { Logout } from "./Components/Login/Logout";
 import AllPlaces from "./Components/Places/AllPlaces";
 import City from "./Components/SearchResults/City";
+import AdminHome from "./Pages/Admin/AdminHome/AdminHome";
+import Profile from "./Components/Profile/Profile";
+import HotelDetails from "./Components/Places/HotelDetails";
 
 function App() {
   return (
@@ -30,6 +33,9 @@ function App() {
           <Route path="/business_home" element={<BusinessHome />} />
           <Route path="/planner" element={<TripBuilder />} />
           <Route path="/allplaces" element={<AllPlaces />} />
+          <Route path="/admin" element={<AdminHome />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/hotel" element={<HotelDetails />} />
         </Routes>
       </Layout>
     </BrowserRouter>

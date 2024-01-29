@@ -37,7 +37,7 @@ function NavBar() {
         fluid
         className="bg-white bg-opacity-10 backdrop-blur-lg dark:bg-slate-800 navcolor shadow-xl fixed top-0"
       >
-        <Navbar.Brand as={Link} href="https://flowbite-react.com">
+        <Navbar.Brand as={Link} href="/">
           <img
             src={Image}
             className="mr-3 sm:h-9 h-px mt-3"
