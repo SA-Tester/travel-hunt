@@ -16,8 +16,6 @@ import AdminHome from "./Pages/Admin/AdminHome/AdminHome";
 import Profile from "./Components/Profile/Profile";
 import HotelDetails from "./Components/Places/HotelDetails";
 import Location from "./Components/SearchResults/Location";
-//import Hotel from "./Components/SearchResults/Hotel";
-import Profile from "./Components/Profile/Profile";
 import Tripinfo from "./Components/Profile/Tripinfo";
 
 function App() {
@@ -37,14 +35,11 @@ function App() {
           <Route path="/business_home" element={<BusinessHome />} />
           <Route path="/planner" element={<TripBuilder />} />
           <Route path="/allplaces" element={<AllPlaces />} />
-<<<<<<< Updated upstream
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/hotel" element={<HotelDetails />} />
-=======
           <Route path="/tripinfo" element={<Tripinfo />} />
           <Route path="/profile" element={<Profile />} />
->>>>>>> Stashed changes
         </Routes>
       </Layout>
     </BrowserRouter>

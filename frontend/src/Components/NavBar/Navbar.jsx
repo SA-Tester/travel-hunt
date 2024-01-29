@@ -50,18 +50,6 @@ function NavBar() {
           <Navbar.Link href="/" active className="text-blue-900">
             Home
           </Navbar.Link>
-          <Navbar.Link href="/planner" className="text-blue-900">
-            Trip Planner
-          </Navbar.Link>
-          <Navbar.Link href="#" className="text-blue-900">
-            Services
-          </Navbar.Link>
-          <Navbar.Link href="#" className="text-blue-900">
-            Pricing
-          </Navbar.Link>
-          <Navbar.Link href="#" className="text-blue-900">
-            Contact
-          </Navbar.Link>
           {authstate ? (
             <Dropdown
               arrowIcon={false}

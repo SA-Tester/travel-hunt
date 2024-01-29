@@ -1,19 +1,26 @@
 import { Progress } from "flowbite-react";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../Components/NavBar/Navbar";
 import TripNameForm from "../Components/TripPlaner/TripNameForm";
 import DatePickerComponent from "../Components/TripPlaner/DatePickerComponent";
 import PlaceSelectForm from "../Components/TripPlaner/PlacesSelectForm";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const TripBuilder = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [slidestate, setSlideState] = useState(0);
   let [progess, setProgress] = useState(0);
 
+  const locationID = new URLSearchParams(location.search).get("l");
+  
   const [tripdata, setTripdata] = useState({
     tripname: "",
     stratdate: "",
     enddate: "",
+    last_location: locationID
   });
 
   // const handleChange = (e) => {
@@ -54,15 +61,24 @@ const TripBuilder = () => {
     calProgress(data.progress);
     console.log(tripdata);
 
-    if(tripdata["tripname"] !== "" && tripdata["startdate"] !== "" && tripdata["enddate"] !== ""){
-      await axios.
-      post("http://localhost:8000/api/save_trip", tripdata).
-      then((response) => {
+    if (
+      tripdata["tripname"] !== "" &&
+      tripdata["startdate"] !== "" &&
+      tripdata["enddate"] !== ""
+    ) {
+      await axios
+        .post("http://localhost:8000/api/save_trip", tripdata)
+        .then((response) => {
+          if(response.data["error"] === "OK"){
+            const locationID = response.data["last_location"];
 
-      }).
-      catch((error) => {
-
-      });
+            toast.success("Trip Saved Successfully");
+            navigate("/location?l=" + locationID, {replace:true});
+          }
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
     }
   };
 

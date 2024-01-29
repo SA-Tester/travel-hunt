@@ -118,7 +118,7 @@ def save_trip(request):
             tripSerializer.is_valid(raise_exception=True)
             tripSerializer.save()
 
-            return Response({"error": "OK"})
+            return Response({"error": "OK", "last_location": data["last_location"]})
         
     except Exception as e:
         return Response({"error": "FAILED"})
