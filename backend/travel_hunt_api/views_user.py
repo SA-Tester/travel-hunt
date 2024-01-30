@@ -171,7 +171,7 @@ def get_user_detials(request):
     email = "test@gmail.com"
     # email = request.user;
     # print(email)
-    
+
     user = User.objects.filter(email=email).values('id', 'email')
     #print(user[0]["id"])
 

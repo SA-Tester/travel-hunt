@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from .functions import placesInCity
 from .functions import hotelsInCity
+from .functions import mapTinyInt
 from .models import City
 from .models import Location
 from .models import Hotel
@@ -94,12 +95,38 @@ def get_location(request, location_id):
                     'country_name': location.city.country.name
                 }
             )
-
+        
     return Response(
         {'error': 'No Data Available'}
     )
 
 
+@api_view(['GET'])
+def get_hotel(request, hotel_id):
+    hotelWithCity = Hotel.objects.select_related(
+            'city').filter(id=hotel_id)
+
+    if(len(hotelWithCity) > 0):
+        hotel = hotelWithCity[0]
+        # print(hotel.id)
+
+        return Response(
+            {
+                'id': hotel.id,
+                'name': hotel.name,
+                'description': hotel.description,
+                'wifi': mapTinyInt(hotel.wifi),
+                'parking': mapTinyInt(hotel.parking),
+                'pool': mapTinyInt(hotel.pool),
+                'restaurant': mapTinyInt(hotel.restaurant),
+                'pub': mapTinyInt(hotel.pub),
+                'transport': mapTinyInt(hotel.transport),
+                'image1': hotel.image1,
+                'image2': hotel.image2,
+                'image3': hotel.image3
+            }
+        )
+    
 @api_view(['GET'])
 def get_popular_city(request):
     # Randomly order the cities and select the first 10

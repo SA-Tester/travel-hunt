@@ -31,13 +31,13 @@ def hotelsInCity(city_id):
             'hotel_name': hotel.name,
             'hotel_desc': hotel.description,
             'image1': hotel.image1,
-            'image2': hotel.image2,
-            'image3': hotel.image3,
-            'wifi': hotel.wifi,
-            'parking': hotel.parking,
-            'pool': hotel.pool,
-            'restaurant': hotel.restaurant,
-            'pub': hotel.pub
+            # 'image2': hotel.image2,
+            # 'image3': hotel.image3,
+            # 'wifi': hotel.wifi,
+            # 'parking': hotel.parking,
+            # 'pool': hotel.pool,
+            # 'restaurant': hotel.restaurant,
+            # 'pub': hotel.pub
         }
 
         data.append(element)
@@ -47,6 +47,7 @@ def hotelsInCity(city_id):
 
 def getTrips(trips):
     data = []
+
     for trip in trips:
         trip_id = trip["id"]
         trip_name = trip["name"]
@@ -62,8 +63,12 @@ def getTrips(trips):
         places = ast.literal_eval(trip["locations"])
         locations = []
         for place in places:
-            location_name = Location.objects.filter(id=place).values('name')
-            locations.append(location_name[0]["name"])
+            if(place[0] == "L"):
+                location_name = Location.objects.filter(id=place).values('name')
+                locations.append(location_name[0]["name"])
+            else:
+                location_name = Hotel.objects.filter(id=place).values('name')
+                locations.append(location_name[0]["name"])
 
         items = {
             'id': trip_id,
@@ -77,3 +82,10 @@ def getTrips(trips):
         data.append(items)
 
     return data
+
+
+def mapTinyInt(value):
+    if (value == 1):
+        return "Yes"
+    else:
+        return "No"

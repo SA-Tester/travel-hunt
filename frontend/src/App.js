@@ -18,6 +18,7 @@ import HotelDetails from "./Components/Places/HotelDetails";
 import Location from "./Components/SearchResults/Location";
 import Tripinfo from "./Components/Profile/Tripinfo";
 import DeleteTrip from "./Components/Profile/DeleteTrip";
+import Hotel from "./Components/SearchResults/Hotel";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/city" element={<City />} />
           <Route path="/location" element={<Location />} />
+          <Route path="/hotel_detials" element={<Hotel />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/logout" element={<Logout />} />

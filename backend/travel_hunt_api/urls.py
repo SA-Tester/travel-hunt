@@ -16,6 +16,9 @@ urlpatterns = [
     path('get_location/<str:location_id>',
          views_general.get_location, name='get_location'),
 
+    path('get_hotel/<str:hotel_id>',
+         views_general.get_hotel, name='get_hotel'),
+
     path('login',
          views_general.LoginView.as_view(), name='login'),
 
@@ -28,7 +31,6 @@ urlpatterns = [
          views_admin.validate_signup, name='validate_admin_signup'),
 
     path('save_trip', views_user.save_trip, name="save_trip"),
-
 
     path('get_previous_trips', views_user.get_previous_trips,
          name="get_previous_trips"),
