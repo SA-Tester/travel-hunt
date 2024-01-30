@@ -28,7 +28,7 @@ urlpatterns = [
          views_admin.validate_signup, name='validate_admin_signup'),
 
     path('save_trip', views_user.save_trip, name="save_trip"),
- 
+
 
     path('get_previous_trips', views_user.get_previous_trips,
          name="get_previous_trips"),
@@ -36,9 +36,12 @@ urlpatterns = [
     path('save_to_trip', views_user.save_to_trip,
          name="save_to_trip"),
 
+    path('delete_trip', views_user.delete_trip,
+         name="delete_trip"),
+
     path('get_user_detials', views_user.get_user_detials,
          name="get_user_detials"),
 
-     path('get_hotels', views_general.get_hotels,
+    path('get_hotels', views_general.get_hotels,
          name="get_hotels")
 ]

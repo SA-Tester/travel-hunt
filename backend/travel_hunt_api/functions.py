@@ -1,5 +1,6 @@
 from .models import Location
 from .models import Hotel
+import ast
 
 
 def placesInCity(city_id):
@@ -40,5 +41,39 @@ def hotelsInCity(city_id):
         }
 
         data.append(element)
+
+    return data
+
+
+def getTrips(trips):
+    data = []
+    for trip in trips:
+        trip_id = trip["id"]
+        trip_name = trip["name"]
+        start = trip["start"]
+        end = trip["end"]
+        is_complete = ""
+
+        if(trip["is_complete"] == False):
+            is_complete = "No"
+        else:
+            is_complete = "Yes"
+
+        places = ast.literal_eval(trip["locations"])
+        locations = []
+        for place in places:
+            location_name = Location.objects.filter(id=place).values('name')
+            locations.append(location_name[0]["name"])
+
+        items = {
+            'id': trip_id,
+            'name': trip_name,
+            'start': start,
+            'end': end,
+            'is_complete': is_complete,
+            'locations': locations 
+        }
+
+        data.append(items)
 
     return data
