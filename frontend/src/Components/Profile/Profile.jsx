@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import FooterCon from "../Footer/FooterCon";
 import NavBar from "../NavBar/Navbar";
-import {
-  useLocation,
-  useNavigate,
-} from "react-router-dom/dist/umd/react-router-dom.development";
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import { toast } from "react-toastify";
 
 const Profile = () => {
@@ -56,6 +51,8 @@ const Profile = () => {
         console.log(error);
       });
   }, []);
+
+  // console.log(data);
 
   if (loggedIn) {
     return (
@@ -144,13 +141,44 @@ const Profile = () => {
                 </div>
               </div>
 
-              {data.trips?.map((trip) => {
+              {data.trips?.map((trip, i) => {
                 return (
-                  <div className="w-full">
+                  <div className="w-full" key={i}>
                     <div className="mb-4 shadow-lg p-4 bg-white rounded-lg">
-                      <h6 className="text-lg font-bold" key={trip.id}>
-                        {trip.name}
-                      </h6>
+                      <div className="grid grid-cols-2 container">
+                        <h6 className="text-lg font-bold text-left">
+                          {trip.name}
+                        </h6>
+                        <a 
+                          href={"/delete_trip?t=" + trip.id}
+                          className="bottom-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        >
+                          Delete
+                        </a>
+                      </div>
+                      <div>
+                        <h6 className="text-sm font-bold">
+                          Start Date - {trip.start}
+                        </h6>
+                      </div>
+                      <div>
+                        <h6 className="text-sm font-bold">
+                          End Date - {trip.end}
+                        </h6>
+                      </div>
+                      <div>
+                        <h6 className="text-sm font-bold">
+                          Is Completed - {trip.is_complete}
+                        </h6>
+                      </div>
+                      <div>
+                        <h6 className="text-sm font-bold">Locations</h6>
+                        <h6 className="text-sm">
+                          {trip.locations.map((location) => {
+                            return <h6>{location}</h6>;
+                          })}
+                        </h6>
+                      </div>
                     </div>
                   </div>
                 );

@@ -4,10 +4,10 @@ from rest_framework import status
 from .models import User
 from .models import Trip
 from .models import Traveller
-from .models import Hotel
 from .serializers import UserSerializer
 from .serializers import TravellerSerializer
 from .serializers import TripSerializer
+from .functions import getTrips
 import copy
 import json
 import ast
@@ -170,12 +170,15 @@ def get_user_detials(request):
     ### COMMENT THIS LINE AND UMCOMMENT THE ONE AFTER
     email = "test@gmail.com"
     # email = request.user;
+    # print(email)
+    
     user = User.objects.filter(email=email).values('id', 'email')
     #print(user[0]["id"])
 
     travellers = Traveller.objects.filter(user_id=user[0]["id"])
     for traveller in travellers:
         trips = Trip.objects.filter(user_id=traveller.user.id).values()
+        # print(getTrips(trips))
 
         data = {
             'email': user[0]['email'],
@@ -183,10 +186,25 @@ def get_user_detials(request):
             'firstname': traveller.firstname,
             'lastname': traveller.lastname,
             'mobile': traveller.mobile,
-            'trips': trips
+            'trips': getTrips(trips)
         }
         #print(data)
 
         return Response({'data': data})
 
     return Response({'error': "Not Found"})
+
+
+@api_view(["POST"])
+def delete_trip(request):
+    trip = Trip.objects.filter(id=request.POST.get("trip_id")).all()
+    # print(request.POST.get("trip_id"))
+    
+    try:
+        # print(trip)
+        trip.delete()
+        return Response({"msg": "success"})
+
+    except Exception as e:
+        print(e)
+        return Response({"msg": "An error occured"})

@@ -17,7 +17,7 @@ import Profile from "./Components/Profile/Profile";
 import HotelDetails from "./Components/Places/HotelDetails";
 import Location from "./Components/SearchResults/Location";
 import Tripinfo from "./Components/Profile/Tripinfo";
-import Test from "./Components/Test/Test";
+import DeleteTrip from "./Components/Profile/DeleteTrip";
 
 function App() {
   return (
@@ -42,7 +42,7 @@ function App() {
           <Route path="/tripinfo" element={<Tripinfo />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/trip_info" element={<Tripinfo />} />
-          <Route path="/test" element={<Test />} />
+          <Route path="/delete_trip" element={<DeleteTrip />} />
         </Routes>
       </Layout>
     </BrowserRouter>

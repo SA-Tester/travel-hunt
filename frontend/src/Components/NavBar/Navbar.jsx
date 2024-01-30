@@ -109,7 +109,7 @@ function NavBar() {
 
               <Dropdown.Divider />
               <Dropdown.Item className="text-white bg-red-400">
-                Sign out
+                <a href="/logout">Sign out</a>
               </Dropdown.Item>
             </Dropdown>
           ) : (
