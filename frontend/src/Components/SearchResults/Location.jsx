@@ -19,7 +19,7 @@ const Location = () => {
     axios
       .get("http://localhost:8000/api/get_location/" + locationID)
       .then((response) => {
-        setData(response.data);
+        setData(response.data.data);
       })
       .catch((error) => {
         console.log(error);

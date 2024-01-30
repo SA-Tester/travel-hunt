@@ -175,12 +175,15 @@ def get_user_detials(request):
 
     travellers = Traveller.objects.filter(user_id=user[0]["id"])
     for traveller in travellers:
+        trips = Trip.objects.filter(user_id=traveller.user.id).values()
+
         data = {
             'email': user[0]['email'],
             'user_id': traveller.user.id,
             'firstname': traveller.firstname,
             'lastname': traveller.lastname,
-            'mobile': traveller.mobile
+            'mobile': traveller.mobile,
+            'trips': trips
         }
         #print(data)
 

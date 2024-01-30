@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from .functions import placesInCity
+from .functions import hotelsInCity
 from .models import City
 from .models import Location
 from .models import Hotel
@@ -40,6 +41,7 @@ def check_city(request, city_name):
 def get_city(request, city_id):
     cityWithCountry = City.objects.select_related('country').filter(id=city_id)
     places = placesInCity(city_id)
+    hotels = hotelsInCity(city_id)
 
     for city in cityWithCountry:
         return Response(
@@ -57,35 +59,10 @@ def get_city(request, city_id):
                 "country_code": city.country.code,
                 "country_description": city.country.description,
                 "country_flag": city.country.flag,
-                "places": places
+                "places": places,
+                "hotels": hotels
             }
         )
-
-    return Response({"msg": "No Data Available"}, status=status.HTTP_404_NOT_FOUND)
-
-
-@api_view(['GET'])
-def get_hotel(request, hotel_id):
-    hotel = Hotel.objects.select_related('hotel').filter(id=hotel_id)
-
-    return Response(
-        {
-            "city_id": city.id,
-            "city_name": city.name,
-            "latitude": city.latitude,
-            "longitude": city.longitude,
-            "city_description": city.description,
-            "image1": city.image1,
-            "image2": city.image2,
-            "image3": city.image3,
-            "country_id": city.country.id,
-            "country_name": city.country.name,
-            "country_code": city.country.code,
-            "country_description": city.country.description,
-            "country_flag": city.country.flag,
-            "places": places
-        }
-    )
 
     return Response({"msg": "No Data Available"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -148,29 +125,8 @@ def get_popular_city(request):
 
 @api_view(["POST"])
 def get_hotels(request):
-    hotels = Hotel.objects.all()
-    # print(user[0]["id"])
-
-    for hotel in hotels:
-        data = {
-            'id': hotel.id,
-            'name': hotel.name,
-            'description': hotel.description,
-            'parking': hotel.parking,
-            'pool': hotel.pool,
-            'restaurant': hotel.restaurant,
-            'pub': hotel.pub,
-            'transport': hotel.transport,
-            'image1': hotel.image1,
-            'image2': hotel.image2,
-            'image3': hotel.image3,
-            'city_id': hotel.city
-        }
-        # print(data)
-
-        return Response({'data': data})
-
-    return Response({'error': "Not Found"})
+    hotels = Hotel.objects.all().values()
+    return Response({'data': hotels})
 
 
 class LoginView(APIView):

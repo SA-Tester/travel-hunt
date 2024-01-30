@@ -21,7 +21,6 @@ const TripBuilder = () => {
     stratdate: "",
     enddate: "",
     last_location: locationID,
-    last_location: locationID,
   });
 
   // const handleChange = (e) => {
