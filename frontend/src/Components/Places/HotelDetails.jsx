@@ -1,19 +1,27 @@
+import { useLocation } from "react-router-dom/dist/umd/react-router-dom.development";
 import NavBar from "../NavBar/Navbar";
+import { useEffect, useState } from "react";
+import FooterCon from "../Footer/FooterCon";
 
 const HotelDetails = () => {
+  const [hoteldata, setHotelData] = useState();
+  let { state } = useLocation();
+  useEffect(() => {
+    setHotelData(state.data);
+  }, []);
   const showModel = () => {
     document.getElementById("select-modal").style = "display:block";
   };
   const closeModel = () => {
     document.getElementById("select-modal").style = "display:hidden";
-  };  
+  };
   return (
     <div>
       <NavBar />
       <div className="flex align-items-center w-100">
         <div className="py-3 flex flex-column  container mt-[15vh] border-b-2 w-50">
           <h3 class="text-2xl dark:text-white text-gray-600 w-50 mb-2">
-            Hotel Name,Location
+            {hoteldata ? hoteldata.name : "Loading..."}
           </h3>
           <span>
             <div class="flex items-center">
@@ -116,7 +124,7 @@ const HotelDetails = () => {
         <div className="sticky top-0  overflow-hidden ">
           <div className="relative mb-6 lg:mb-10" style={{ height: "450px" }}>
             <img
-              src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/0d/04/the-ritz-london-exterior.jpg?w=1200&h=-1&s=1"
+              src={hoteldata ? hoteldata.image1 : "Loading..."}
               alt=""
               className="object-contain w-full h-full "
             />
@@ -128,7 +136,7 @@ const HotelDetails = () => {
                 className="block border border-blue-100 dark:border-gray-700 dark:hover:border-gray-600 hover:border-blue-300 "
               >
                 <img
-                  src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/0d/04/the-ritz-london-exterior.jpg?w=1200&h=-1&s=1"
+                  src={hoteldata ? hoteldata.image2 : "Loading..."}
                   alt=""
                   className="object-cover w-full lg:h-32"
                 />
@@ -140,7 +148,7 @@ const HotelDetails = () => {
                 className="block border border-blue-100 dark:border-transparent dark:hover:border-gray-600 hover:border-blue-300"
               >
                 <img
-                  src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/0d/04/the-ritz-london-exterior.jpg?w=1200&h=-1&s=1"
+                  src={hoteldata ? hoteldata.image3 : "Loading..."}
                   alt=""
                   className="object-cover w-full lg:h-32"
                 />
@@ -263,6 +271,7 @@ const HotelDetails = () => {
           </div>
         </div>
       </center>
+      <FooterCon />
     </div>
   );
 };

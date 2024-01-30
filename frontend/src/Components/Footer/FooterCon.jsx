@@ -7,17 +7,20 @@ const FooterCon = () => {
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
-            <Footer.Brand
-              href="https://flowbite.com"
-              src={Image}
-              alt="Flowbite Logo"
-            />
+            <Footer.Brand href="/" src={Image} alt=" Logo" />
           </div>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
             <div>
+              <Footer.Title title="Site" />
+              <Footer.LinkGroup col>
+                <Footer.Link href="/">Home</Footer.Link>
+                <Footer.Link href="/planner">Trip Planner</Footer.Link>
+              </Footer.LinkGroup>
+            </div>
+            <div>
               <Footer.Title title="about" />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Flowbite</Footer.Link>
+                <Footer.Link href="#">Travel Hunt</Footer.Link>
                 <Footer.Link href="#">Tailwind CSS</Footer.Link>
               </Footer.LinkGroup>
             </div>

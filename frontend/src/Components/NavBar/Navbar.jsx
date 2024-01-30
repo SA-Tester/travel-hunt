@@ -98,10 +98,10 @@ function NavBar() {
               }
             >
               <Dropdown.Header>
-                <span className="block text-sm">{userdata["name"]}</span>
+                {/* <span className="block text-sm">{userdata["name"]}</span>
                 <span className="block truncate text-sm font-medium">
                   {userdata["email"]}
-                </span>
+                </span> */}
               </Dropdown.Header>
               <Dropdown.Item>
                 <a href="/profile">Profile</a>
