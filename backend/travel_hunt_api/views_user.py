@@ -168,8 +168,9 @@ def save_to_trip(request):
 @api_view(["POST"])
 def get_user_detials(request):
     ### COMMENT THIS LINE AND UMCOMMENT THE ONE AFTER
-    email = "test@gmail.com"
-    # email = request.user;
+    #email = "test@gmail.com"
+    email = request.user;
+    print(request.user)
     # print(email)
 
     user = User.objects.filter(email=email).values('id', 'email')
