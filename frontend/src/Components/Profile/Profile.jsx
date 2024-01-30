@@ -11,6 +11,19 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    (async () => {
+      await axios
+        .post("http://localhost:8000/api/get_user_detials")
+        .then((response) => {
+          setData(response.data.data); 
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })(); 
+  }, []);
+
+  useEffect(() => {
     if (localStorage.getItem("access_token") !== null) {
       (async () => {
         try {
@@ -39,19 +52,6 @@ const Profile = () => {
       // toast.error("Session Expired. Please login again");
       // navigate("/login", { replace: true });
     }
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      await axios
-        .post("http://localhost:8000/api/get_user_detials")
-        .then((response) => {
-          setData(response.data.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    })();
   }, []);
 
   // console.log(data);

@@ -11,7 +11,7 @@ from .functions import mapTinyInt
 from .models import City
 from .models import Location
 from .models import Hotel
-from django.core.serializers import serialize
+# from django.core.serializers import serialize
 
 
 @api_view(['GET'])
