@@ -191,7 +191,7 @@ const City = () => {
                         <div class="h-[30vh]">
                           <Link
                             // to={"/location?l=" + element.location_id}
-                            to={"/hotel_detials?l=" + element.hotel_id}
+                            to={"/hotel_details?l=" + element.hotel_id}
                             // state={{ data: element }}
                             className="flex-shrink-0"
                           >
