@@ -1,4 +1,7 @@
-Travel Hunt
-A travel management app based on React JS and Python (Django)
+# Travel Hunt
 
-Kill processes on Port 8000 - sudo lsof -t -i tcp:8000 | xargs kill -9
+### The 3rd Year - 1st Semester: Advanced Programming Techniques Project
+
+Travel hunt is a travel planning web applications based on React and Python Django framewroks.
+The project uses the support of MySQL database platform for data storage.
+Also, several web-scrapers and multithreading concepts were used to add data to the database.
